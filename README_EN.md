@@ -21,11 +21,11 @@ The heart of Synetra was refactored using *Single-Evaluation* and *Global Join* 
 - **16-Year Dataset Computation (5,200+ rows):** ~3.2 seconds.
 - **Extreme Vectorization:** Complete removal of Pandas. The transformation engine handles all mathematical calculations natively at the Rust/C++ layer.
 
-#### 🛠️ What's new in v1.0.0
-- **Elite Refactoring:** Replaced Python iterations with parallel Comprehensions and unified Joins in `transformer.py`.
-- **Strict Validation (Pydantic):** The `parameters.toml` file is validated at boot, preventing invalid configurations.
-- **Integrated Financial Auditor:** Automatically detects time gaps and ROE outliers during execution.
-- **Unit Testing Suite:** 38 tests implemented via `pytest` covering 100% of the financial logic (ROE, F-Score, Safe Divisions).
+#### 🛠️ Key Features (v1.0.0)
+- **Vectorized Engine:** High-performance processing using parallel Comprehensions and unified Joins in `transformer.py`.
+- **Configuration Integrity:** Strict Pydantic validation ensuring the pipeline only operates with valid parameters.
+- **Integrated Financial Auditor:** Automated detection of time gaps and mathematical anomalies (e.g., ROE outliers).
+- **Quality Assurance (TDD):** A robust suite of 38 unit tests validating 100% of the financial and mathematical logic.
 
 #### 🏗️ System Architecture
 

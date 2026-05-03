@@ -21,11 +21,11 @@ O coração do Synetra foi refatorado utilizando padrões de *Single-Evaluation*
 - **Tempo de Cálculo de 16 Anos de Dados (5.200+ registros):** ~3.2 segundos.
 - **Vetorização Extrema:** Remoção total do Pandas. O motor de transformação processa todos os cálculos matemáticos nativamente na camada C++/Rust.
 
-#### 🛠️ Novidades da v1.0.0 (Minor Update)
-- **Refatoração de Elite:** Substituição de iterações Python por Comprehensions paralelas e Joins unificados no `transformer.py`.
-- **Validação Estrita (Pydantic):** O arquivo `parameters.toml` agora possui uma barreira de segurança que aborta execuções com configurações inválidas.
-- **Financial Auditor Integrado:** O pipeline agora audita a si mesmo no final da execução, detectando gaps temporais e ROEs astronômicos gerados por distorções de Patrimônio Líquido negativo.
-- **Suíte de Testes Unitários:** 38 testes implementados via `pytest` cobrindo 100% da lógica matemática (ROE, F-Score, Divisões Seguras).
+#### 🛠️ Destaques da Engenharia (v1.0.0)
+- **Motor Vetorizado:** Processamento de alta performance utilizando Comprehensions paralelas e Joins unificados no `transformer.py`.
+- **Integridade de Configuração:** Validação estrita via Pydantic para garantir que o pipeline opere apenas com parâmetros válidos.
+- **Auditoria Financeira Integrada:** Detecção automática de gaps temporais e distorções matemáticas (ex: ROE anômalo) durante a execução.
+- **Garantia de Qualidade (TDD):** Suíte com 38 testes unitários que validam 100% da lógica financeira e matemática do sistema.
 
 #### 🏗️ Arquitetura do Sistema
 
