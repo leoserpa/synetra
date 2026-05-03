@@ -14,10 +14,10 @@
 
 **Synetra** is a financial data processing engine designed to extract, clean, and transform massive amounts of raw CVM (Brazilian SEC) data into an analysis-ready fundamental indicators database for institutional research.
 
-Version **1.0.0** represents an engineering leap, transforming Synetra from an analytical script into a robust data product with strict typing (Pydantic), a unit testing suite (TDD), and an elite Rust/Polars engine refactor.
+Version **1.0.0** is built with high-level engineering, operating as a robust data product with strict typing (Pydantic), a unit testing suite (TDD), and a native Rust/Polars engine.
 
 #### ⚡ Performance Benchmarks (v1.0.0)
-The heart of Synetra was refactored using *Single-Evaluation* and *Global Join* patterns from the Polars ecosystem:
+The heart of Synetra uses *Single-Evaluation* and *Global Join* patterns from the Polars ecosystem:
 - **16-Year Dataset Computation (5,200+ rows):** ~3.2 seconds.
 - **Extreme Vectorization:** Complete removal of Pandas. The transformation engine handles all mathematical calculations natively at the Rust/C++ layer.
 

@@ -14,10 +14,10 @@
 
 O **Synetra** é um motor de processamento de dados financeiros desenhado para extrair, limpar e transformar o volume massivo de dados brutos da CVM (Comissão de Valores Mobiliários) em uma base de indicadores fundamentalistas pronta para análise institucional.
 
-A versão **1.0.0** representa um salto de engenharia, transformando o Synetra de um script analítico em um produto robusto, com tipagem estrita (Pydantic), suíte de testes (TDD) e uma refatoração de elite do motor Rust/Polars.
+A versão **1.0.0** é construída com engenharia de alto nível, operando como um produto de dados robusto com tipagem estrita (Pydantic), suíte de testes (TDD) e um motor nativo em Rust/Polars.
 
 #### ⚡ Performance (Benchmark v1.0.0)
-O coração do Synetra foi refatorado utilizando padrões de *Single-Evaluation* e *Global Joins* do ecossistema Polars:
+O coração do Synetra utiliza padrões de *Single-Evaluation* e *Global Joins* do ecossistema Polars:
 - **Tempo de Cálculo de 16 Anos de Dados (5.200+ registros):** ~3.2 segundos.
 - **Vetorização Extrema:** Remoção total do Pandas. O motor de transformação processa todos os cálculos matemáticos nativamente na camada C++/Rust.
 
