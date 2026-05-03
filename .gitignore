@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environments
+venv/
+ENV/
+env/
+.env
+
+# Project specific caches
+.synetra_cache/
+
+# Data outputs (optional, but recommended to keep repo light)
+serie_historica_financeira.csv
+temp_patrim.csv
+
+# IDEs
+.vscode/
+.idea/
+
+# Arquivos locais e logs que não devem subir
+synetra.log
+docs/AUDIT_REPORT.md

@@ -1,0 +1,11 @@
+pandas
+polars
+requests
+cloudscraper
+rapidfuzz
+unidecode
+lxml
+pyarrow
+tomli
+pydantic
+pytest
