@@ -8,13 +8,28 @@ venv/
 ENV/
 env/
 .env
+.venv/
 
 # Project specific caches
 .synetra_cache/
+.pytest_cache/
+.ruff_cache/
 
 # Data outputs (optional, but recommended to keep repo light)
 serie_historica_financeira.csv
+snapshot_atual.csv
+consistencia_historica.csv
+top_stocks_2025.csv
 temp_patrim.csv
+
+# Coverage reports
+.coverage
+htmlcov/
+.hypothesis/
+.mypy_cache/
+
+# Scratch / experiments (not part of production)
+scratch/
 
 # IDEs
 .vscode/
@@ -23,3 +38,4 @@ temp_patrim.csv
 # Arquivos locais e logs que não devem subir
 synetra.log
 docs/AUDIT_REPORT.md
+data_quality_report.csv

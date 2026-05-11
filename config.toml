@@ -1,25 +1,30 @@
-# ============================================================
-# Synetra - Arquivo de Configuração Central
-# ============================================================
+# Synetra — configuração do pipeline.
 
 [urls]
 dfp_pattern = "https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/DFP/DADOS/dfp_cia_aberta_{year}.zip"
 fre_pattern = "http://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/FRE/DADOS/fre_cia_aberta_{year}.zip"
 cadastro = "http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv"
-fundamentus = "https://www.fundamentus.com.br/detalhes.php"
 
 [pipeline]
 doc_types = ["DRE", "BPA", "BPP", "DFC_MI", "DFC_MD"]
 years_start = 2010
 years_end = 2026
 max_workers = 5
+force_refresh = false
 
-[fuzzy_match]
-threshold = 85
+# --- Integração com Yahoo Finance ---
 
-# ============================================================
-# Mapeamento de Contas Contábeis por Setor
-# ============================================================
+# Baixa cotações históricas da B3 e anexa ao CSV final como
+# PRECO_FIM_ANO, PRECO_MEDIO_ANO e VOLUME_MEDIO. Desabilitado roda
+# só com dados contábeis da CVM.
+
+[market]
+enabled = true
+cache_max_age_days = 7
+batch_size = 100
+
+
+# --- Mapeamento de contas contábeis por setor ---
 
 [contas.industrial]
 "1" = "ATIVO_TOTAL"
@@ -27,30 +32,40 @@ threshold = 85
 "3.03" = "RESULTADO_BRUTO"
 "3.05" = "EBIT"
 "3.11" = "LUCRO_LIQUIDO"
+"3.11.01" = "LUCRO_CONTROLADORA"
 "3.09" = "LUCRO_LIQUIDO_BCO"
+"3.09.01" = "LUCRO_CONTROLADORA_BCO"
 "1.01" = "ATIVO_CIRCULANTE"
 "2.01" = "PASSIVO_CIRCULANTE"
 "2.03" = "PATRIMONIO_LIQUIDO"
 "1.01.01" = "CAIXA_EQUIVALENTES"
 "1.01.02" = "CAIXA_EQUIVALENTES"
+"1.01.03" = "CONTAS_A_RECEBER"
+"1.02" = "ATIVO_NAO_CIRCULANTE"
+"1.02.03" = "IMOBILIZADO"
 "2.01.04" = "DIVIDA_CP"
 "2.02.01" = "DIVIDA_LP"
+"3.04" = "DESPESAS_OPERACIONAIS"
 "6.01" = "FCO"
 "6.02" = "FCI"
 "6.03" = "FCF"
 
 [contas.financeiro]
 "1" = "ATIVO_TOTAL"
-"1.01" = "ATIVO_CIRCULANTE"
 "1.01.01" = "CAIXA_EQUIVALENTES"
+"1.01.08" = "CONTAS_A_RECEBER"
+"1.06" = "IMOBILIZADO"
 "2.01" = "PASSIVO_CIRCULANTE"
 "3.01" = "RECEITA_LIQUIDA"
 "3.03" = "RESULTADO_BRUTO"
+"3.04" = "DESPESAS_OPERACIONAIS"
 "3.05" = "EBIT"
-"3.11" = "LUCRO_LIQUIDO"
-"3.09" = "LUCRO_LIQUIDO_BCO"
-"2.08" = "PATRIMONIO_LIQUIDO"
+"3.09" = "LUCRO_LIQUIDO"
+"3.09.01" = "LUCRO_CONTROLADORA"
+"3.11" = "LUCRO_LIQUIDO_BCO"
+"3.11.01" = "LUCRO_CONTROLADORA_BCO"
 "2.07" = "PATRIMONIO_LIQUIDO"
+"2.08" = "PATRIMONIO_LIQUIDO"
 "6.01" = "FCO"
 "6.02" = "FCI"
 "6.03" = "FCF"
@@ -60,22 +75,35 @@ threshold = 85
 "1.01" = "ATIVO_CIRCULANTE"
 "1.01.01" = "CAIXA_EQUIVALENTES"
 "1.01.02" = "APLICACOES_CP"
+"1.01.03" = "CONTAS_A_RECEBER"
+"1.02" = "ATIVO_NAO_CIRCULANTE"
 "1.02.01.01" = "APLICACOES_LP"
+"1.02.03" = "IMOBILIZADO"
 "2.01" = "PASSIVO_CIRCULANTE"
 "3.01" = "RECEITA_LIQUIDA"
 "3.01.01" = "RECEITA_LIQUIDA"
 "3.03" = "RESULTADO_BRUTO"
+"3.04" = "DESPESAS_OPERACIONAIS"
 "3.11" = "LUCRO_LIQUIDO"
+"3.11.01" = "LUCRO_CONTROLADORA"
 "3.09" = "LUCRO_LIQUIDO_BCO"
+"3.09.01" = "LUCRO_CONTROLADORA_BCO"
 "2.03" = "PATRIMONIO_LIQUIDO"
 "6.01" = "FCO"
 "6.02" = "FCI"
 "6.03" = "FCF"
 
-# ============================================================
-# Classificação de Setores por Palavras-Chave
-# ============================================================
+# --- Classificação setorial por palavras-chave ---
 
 [setores]
 financeiro = ["BANCO", "ARRENDAMENTO", "FACTORING", "CREDITO", "SECURITIZACAO"]
 seguradora = ["SEGURO", "SEGURADORA", "PREVIDENCIA", "CAPITALIZACAO"]
+
+# --- Regex para detecção de contas especiais na DFC ---
+
+[regex]
+depreciacao = "DEPRECIA|AMORTIZA"
+capex = "AQUISIC|ADIC|COMPRA"
+capex_tipo = "IMOBILIZADO|INTANGIVEL"
+dividendos = "DIVIDENDO|JURO SOBRE CAPITAL|JUROS SOBRE CAPITAL|JURO S CAPITAL|JUROS S CAPITAL|JCP"
+ebit_seguradora = "RESULTADO ANTES DO RESULTADO FINANCEIRO|RESULTADO ANTES DAS RECEITAS"

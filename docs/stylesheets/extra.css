@@ -1,0 +1,30 @@
+/* Estilos customizados do site de documentação Synetra. */
+
+/* Paleta principal. */
+:root > * {
+  --md-primary-fg-color: #7c4dff;
+  --md-accent-fg-color: #ffc107;
+}
+
+/* Code blocks mais legíveis. */
+.md-typeset code {
+  font-size: 0.88em;
+  border-radius: 4px;
+}
+
+/* Cantos arredondados nos blocos de alerta. */
+.md-typeset .admonition {
+  border-radius: 6px;
+}
+
+/* Tabelas. */
+.md-typeset table:not([class]) {
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 600;
+}
