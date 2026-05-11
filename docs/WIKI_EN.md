@@ -65,29 +65,29 @@ The pipeline runs four passes over the CVM data before producing the historical 
 ```mermaid
 graph LR
     subgraph CVM["Raw CVM data"]
-        ZIP["Yearly ZIPs<br/>DFP + FRE + Registry"]
+        ZIP["Yearly ZIPs<br>DFP + FRE + Registry"]
     end
 
     subgraph P1["1. Preparation"]
-        PROJ["Projection pushdown<br/>(5 core columns)"]
-        SETOR["Sector enrichment<br/>+ 3-category classification"]
-        REGEX["Special account<br/>detection (regex)"]
-        MAP["Code → name map<br/>(per sector)"]
+        PROJ["Projection pushdown<br>(5 core columns)"]
+        SETOR["Sector enrichment<br>+ 3-category classification"]
+        REGEX["Special account<br>detection (regex)"]
+        MAP["Code → name map<br>(per sector)"]
     end
 
     subgraph P2["2. Pivot"]
-        PIVOT["pivot VL_CONTA<br/>by CONTA_NOME"]
-        FILL["Fill missing<br/>columns with 0.0"]
-        SEGUROS["Insurer cash<br/>consolidation"]
-        LUCRO["Net income<br/>resolution"]
-        FRE["FRE merge<br/>(share count)"]
+        PIVOT["pivot VL_CONTA<br>by CONTA_NOME"]
+        FILL["Fill missing<br>columns with 0.0"]
+        SEGUROS["Insurer cash<br>consolidation"]
+        LUCRO["Net income<br>resolution"]
+        FRE["FRE merge<br>(share count)"]
     end
 
     subgraph P3["3. Calculations"]
-        TIER["Tiers 1 to 5<br/>(domain layer)"]
-        SHIFT["Shifts and rolling<br/>in a single batch"]
-        FBEN["F-Score and<br/>Beneish"]
-        QUANT["Growth + Quant<br/>+ Efficiency"]
+        TIER["Tiers 1 to 5<br>(domain layer)"]
+        SHIFT["Shifts and rolling<br>in a single batch"]
+        FBEN["F-Score and<br>Beneish"]
+        QUANT["Growth + Quant<br>+ Efficiency"]
     end
 
     subgraph P4["4. Finalization"]
@@ -314,11 +314,11 @@ All indicators below live in `synetra/domain/indicators.py` as pure functions. T
 
 ```mermaid
 graph TD
-    T1["Tier 1 — Profitability<br/>ROE · ROA · EPS · BVPS · Turnover<br/>Margins · Accruals · CAPEX"]
-    T2["Tier 2 — Cash flow<br/>FCF · Payout · EBITDA"]
-    T3["Tier 3 — Capital structure<br/>EBITDA margin · Total debt<br/>Current ratio"]
-    T4["Tier 4 — Leverage<br/>Net debt · Debt/Equity"]
-    T5["Tier 5 — Final ratios<br/>ND/EBITDA · ROIC · Altman Z''"]
+    T1["Tier 1 — Profitability<br>ROE · ROA · EPS · BVPS · Turnover<br>Margins · Accruals · CAPEX"]
+    T2["Tier 2 — Cash flow<br>FCF · Payout · EBITDA"]
+    T3["Tier 3 — Capital structure<br>EBITDA margin · Total debt<br>Current ratio"]
+    T4["Tier 4 — Leverage<br>Net debt · Debt/Equity"]
+    T5["Tier 5 — Final ratios<br>ND/EBITDA · ROIC · Altman Z''"]
 
     T1 --> T2 --> T3 --> T4 --> T5
 

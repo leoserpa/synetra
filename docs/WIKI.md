@@ -65,29 +65,29 @@ O pipeline completo faz quatro travessias sobre os dados da CVM antes de produzi
 ```mermaid
 graph LR
     subgraph CVM["Dados brutos da CVM"]
-        ZIP["ZIPs por ano<br/>DFP + FRE + Cadastro"]
+        ZIP["ZIPs por ano<br>DFP + FRE + Cadastro"]
     end
 
     subgraph P1["1. Preparação"]
-        PROJ["Projection pushdown<br/>(5 colunas nucleares)"]
-        SETOR["Enriquecimento setorial<br/>+ classificação em 3 categorias"]
-        REGEX["Detecção de contas<br/>especiais (regex)"]
-        MAP["Mapa código → nome<br/>(por setor)"]
+        PROJ["Projection pushdown<br>(5 colunas nucleares)"]
+        SETOR["Enriquecimento setorial<br>+ classificação em 3 categorias"]
+        REGEX["Detecção de contas<br>especiais (regex)"]
+        MAP["Mapa código → nome<br>(por setor)"]
     end
 
     subgraph P2["2. Pivot"]
-        PIVOT["pivot VL_CONTA<br/>por CONTA_NOME"]
-        FILL["Preenche colunas<br/>faltantes com 0.0"]
-        SEGUROS["Consolidação<br/>caixa seguradoras"]
-        LUCRO["Resolução do<br/>Lucro Líquido"]
-        FRE["Merge FRE<br/>(qtde de ações)"]
+        PIVOT["pivot VL_CONTA<br>por CONTA_NOME"]
+        FILL["Preenche colunas<br>faltantes com 0.0"]
+        SEGUROS["Consolidação<br>caixa seguradoras"]
+        LUCRO["Resolução do<br>Lucro Líquido"]
+        FRE["Merge FRE<br>(qtde de ações)"]
     end
 
     subgraph P3["3. Cálculos"]
-        TIER["Tiers 1 a 5<br/>(domain layer)"]
-        SHIFT["Shifts e rolling<br/>em lote único"]
-        FBEN["F-Score e<br/>Beneish"]
-        QUANT["Growth + Quant<br/>+ Eficiência"]
+        TIER["Tiers 1 a 5<br>(domain layer)"]
+        SHIFT["Shifts e rolling<br>em lote único"]
+        FBEN["F-Score e<br>Beneish"]
+        QUANT["Growth + Quant<br>+ Eficiência"]
     end
 
     subgraph P4["4. Finalização"]
@@ -315,11 +315,11 @@ Todos os indicadores abaixo vivem em `synetra/domain/indicators.py` como funçõ
 
 ```mermaid
 graph TD
-    T1["Tier 1 — Rentabilidade<br/>ROE · ROA · LPA · VPA · Giro<br/>Margens · Accruals · CAPEX"]
-    T2["Tier 2 — Fluxo de caixa<br/>FCL · Payout · EBITDA"]
-    T3["Tier 3 — Estrutura de capital<br/>Margem EBITDA · Dívida Total<br/>Liquidez Corrente"]
-    T4["Tier 4 — Alavancagem<br/>Dívida Líquida · Dívida/PL"]
-    T5["Tier 5 — Ratios finais<br/>DL/EBITDA · ROIC · Altman Z''"]
+    T1["Tier 1 — Rentabilidade<br>ROE · ROA · LPA · VPA · Giro<br>Margens · Accruals · CAPEX"]
+    T2["Tier 2 — Fluxo de caixa<br>FCL · Payout · EBITDA"]
+    T3["Tier 3 — Estrutura de capital<br>Margem EBITDA · Dívida Total<br>Liquidez Corrente"]
+    T4["Tier 4 — Alavancagem<br>Dívida Líquida · Dívida/PL"]
+    T5["Tier 5 — Ratios finais<br>DL/EBITDA · ROIC · Altman Z''"]
 
     T1 --> T2 --> T3 --> T4 --> T5
 

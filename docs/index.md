@@ -54,7 +54,7 @@ graph TB
         DL["downloader.py<br>(async HTTPX + cache)"]
         LD["loader.py<br>(ZIP → Parquet)"]
         YC["market/yahoo_client.py"]
-        CACHE[(".synetra_cache/<br>Parquet)"]
+        CACHE[".synetra_cache Parquet"]
     end
 
     subgraph "Domínio (puro)"

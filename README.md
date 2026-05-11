@@ -68,22 +68,22 @@ graph TB
     end
 
     subgraph "Infra (bordas)"
-        DL["downloader.py<br/>(async HTTPX + cache)"]
-        LD["loader.py<br/>(ZIP → Parquet)"]
+        DL["downloader.py<br>(async HTTPX + cache)"]
+        LD["loader.py<br>(ZIP → Parquet)"]
         YC["market/yahoo_client.py"]
-        CACHE[(".synetra_cache/<br/>Parquet)"]
+        CACHE[".synetra_cache Parquet"]
     end
 
     subgraph "Domínio (puro)"
-        DOM["domain/indicators.py<br/>(Tiers 1-5)"]
-        TR["transformer.py<br/>(orquestrador)"]
+        DOM["domain/indicators.py<br>(Tiers 1-5)"]
+        TR["transformer.py<br>(orquestrador)"]
     end
 
     subgraph "Saída"
         CSV1["serie_historica_financeira.csv"]
         CSV2["snapshot_atual.csv"]
-        DQ["data_quality/<br/>data_quality_report.csv"]
-        OBS["observability.py<br/>(métricas)"]
+        DQ["data_quality/<br>data_quality_report.csv"]
+        OBS["observability.py<br>(métricas)"]
     end
 
     CVM --> DL --> CACHE --> LD --> TR
