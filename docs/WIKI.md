@@ -15,24 +15,24 @@ Este documento é derivado do código real. Cada fórmula cita o arquivo e o tre
 
 ## Sumário
 
-1. [Contratos e convenções](#contratos-e-convenções)
-2. [Da CVM ao indicador — visão geral](#da-cvm-ao-indicador--visão-geral)
+1. [Contratos e convenções](#contratos-e-convencoes)
+2. [Da CVM ao indicador — visão geral](#da-cvm-ao-indicador--visao-geral)
 3. [Mapeamento de contas por setor](#mapeamento-de-contas-por-setor)
-4. [Classificação setorial](#classificação-setorial)
-5. [Detecção de contas especiais (regex)](#detecção-de-contas-especiais-regex)
-6. [Pivot e consolidações](#pivot-e-consolidações)
-7. [Resolução do Lucro Líquido](#resolução-do-lucro-líquido)
+4. [Classificação setorial](#classificacao-setorial)
+5. [Detecção de contas especiais (regex)](#deteccao-de-contas-especiais-regex)
+6. [Pivot e consolidações](#pivot-e-consolidacoes)
+7. [Resolução do Lucro Líquido](#resolucao-do-lucro-liquido)
 8. [Indicadores por tier (domain layer)](#indicadores-por-tier-domain-layer)
 9. [Piotroski F-Score](#piotroski-f-score)
 10. [Beneish M-Score](#beneish-m-score)
 11. [Crescimento — YoY e CAGR](#crescimento--yoy-e-cagr)
 12. [Fatores quantitativos (Quality · Momentum · Risk)](#fatores-quantitativos-quality--momentum--risk)
-13. [Eficiência operacional e qualidade](#eficiência-operacional-e-qualidade)
-14. [Valuation — histórico e snapshot atual](#valuation--histórico-e-snapshot-atual)
+13. [Eficiência operacional e qualidade](#eficiencia-operacional-e-qualidade)
+14. [Valuation — histórico e snapshot atual](#valuation--historico-e-snapshot-atual)
 15. [Assepsia setorial — resumo consolidado](#assepsia-setorial--resumo-consolidado)
 16. [Auditoria e Data Quality](#auditoria-e-data-quality)
-17. [Arredondamentos e tipos de saída](#arredondamentos-e-tipos-de-saída)
-18. [Referência cruzada de arquivos](#referência-cruzada-de-arquivos)
+17. [Arredondamentos e tipos de saída](#arredondamentos-e-tipos-de-saida)
+18. [Referência cruzada de arquivos](#referencia-cruzada-de-arquivos)
 
 ---
 

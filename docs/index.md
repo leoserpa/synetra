@@ -123,7 +123,6 @@ uv run pip-audit
 ## Navegação
 
 - [Wiki Técnica](WIKI.md) — fórmulas, mapeamento de contas CVM, regras de assepsia setorial, lógica de resolução de lucro, detecção de contas especiais via regex, Beneish termo a termo, valuation, data quality. [English version](WIKI_EN.md).
-- [README](../README.md) — visão geral e setup
 - [Mapeamento de contas por setor](WIKI.md#mapeamento-de-contas-por-setor) — qual código CVM vira qual nome interno, por setor
 - [Indicadores por tier](WIKI.md#indicadores-por-tier-domain-layer) — fórmulas de Tiers 1 a 5
 - [Assepsia setorial consolidada](WIKI.md#assepsia-setorial--resumo-consolidado) — o que é calculado em cada setor
