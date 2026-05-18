@@ -1,0 +1,3805 @@
+
+<!doctype html>
+<html lang="pt" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Referência técnica do pipeline Synetra — indicadores, mapeamento de contas CVM e lógica de cálculo.">
+      
+      
+        <meta name="author" content="Synetra Team">
+      
+      
+        <link rel="canonical" href="https://synetra.github.io/synetra/WIKI/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../WIKI_EN/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Synetra Technical Wiki - Synetra Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#synetra-technical-wiki" class="md-skip">
+          Ir para o conteúdo
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href=".." title="Synetra Documentation" class="md-header__button md-logo" aria-label="Synetra Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Synetra Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Synetra Technical Wiki
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="deep-purple" data-md-color-accent="amber"  aria-label="Mudar para tema claro"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema claro" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="deep-purple" data-md-color-accent="amber"  aria-label="Mudar para tema escuro"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Mudar para tema escuro" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Pesquisar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando a pesquisa
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/synetra/synetra" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    synetra
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Início
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Wiki Técnica
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../WIKI_EN/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Technical Wiki (EN)
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Synetra Documentation" class="md-nav__button md-logo" aria-label="Synetra Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Synetra Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/synetra/synetra" title="Ir ao repositório" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    synetra
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Início
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki Técnica
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wiki Técnica
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sumário
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contratos-e-convencoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contratos e convenções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contratos e convenções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notacao-usada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notação usada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#da-cvm-ao-indicador-visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Da CVM ao indicador — visão geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapeamento-de-contas-por-setor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapeamento de contas por setor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapeamento de contas por setor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#industrial-configtoml-contasindustrial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Industrial — config.toml [contas.industrial]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#financeiro-bancos-configtoml-contasfinanceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Financeiro (bancos) — config.toml [contas.financeiro]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seguradora-configtoml-contasseguradora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguradora — config.toml [contas.seguradora]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classificacao-setorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classificação setorial
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deteccao-de-contas-especiais-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecção de contas especiais (regex)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pivot-e-consolidacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pivot e consolidações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pivot e consolidações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otimizacao-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Otimização de memória
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pivot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pivot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill-de-colunas-ausentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fill de colunas ausentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consolidacao-de-caixa-seguradoras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consolidação de caixa (seguradoras)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucao-do-lucro-liquido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolução do Lucro Líquido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indicadores-por-tier-domain-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicadores por tier (domain layer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indicadores por tier (domain layer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tier-1-rentabilidade-e-bases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 1 — Rentabilidade e bases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2-fluxo-de-caixa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2 — Fluxo de caixa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-3-estrutura-de-capital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 3 — Estrutura de capital
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-4-alavancagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 4 — Alavancagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-5-ratios-finais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 5 — Ratios finais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#piotroski-f-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Piotroski F-Score
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneish-m-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beneish M-Score
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beneish M-Score">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os-8-termos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Os 8 termos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regras-de-guarda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de guarda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crescimento-yoy-e-cagr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crescimento — YoY e CAGR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crescimento — YoY e CAGR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yoy-year-over-year" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YoY (Year-over-Year)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cagr-compound-annual-growth-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CAGR (Compound Annual Growth Rate)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fatores-quantitativos-quality-momentum-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fatores quantitativos (Quality · Momentum · Risk)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fatores quantitativos (Quality · Momentum · Risk)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-de-fatores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela de fatores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-cash_conversion-e-anulado-em-bancos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que CASH_CONVERSION é anulado em bancos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias-academicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências acadêmicas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eficiencia-operacional-e-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eficiência operacional e qualidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Eficiência operacional e qualidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-9-sao-anulados-para-bancos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que 9 são anulados para bancos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação rápida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valuation-historico-e-snapshot-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valuation — histórico e snapshot atual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Valuation — histórico e snapshot atual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agregacao-diaria-anual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregação diária → anual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#market-cap-consolidado-on-pn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Market Cap consolidado (ON + PN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiplos-calculados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Múltiplos calculados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshot-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Snapshot atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assepsia-setorial-resumo-consolidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assepsia setorial — resumo consolidado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assepsia setorial — resumo consolidado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indicadores-industriais-classicos-passo-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicadores industriais clássicos (passo 5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indicadores-de-eficiencia-passo-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicadores de eficiência (passo 10)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valuation-price_aggregator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valuation (price_aggregator)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scores-passos-7-e-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scores (passos 7 e 8)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auditoria-e-data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auditoria e Data Quality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auditoria e Data Quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auditoria-temporal-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auditoria temporal (transformer)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-quality-por-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Quality por ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arredondamentos-e-tipos-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arredondamentos e tipos de saída
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arredondamentos e tipos de saída">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quatro-casas-decimais-ratios-e-percentuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quatro casas decimais (ratios e percentuais)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#duas-casas-decimais-valores-monetarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duas casas decimais (valores monetários)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-especiais-valuation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos especiais (valuation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencia-cruzada-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referência cruzada de arquivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../WIKI_EN/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Technical Wiki (EN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#sumario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sumário
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contratos-e-convencoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contratos e convenções
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Contratos e convenções">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notacao-usada" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Notação usada
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#da-cvm-ao-indicador-visao-geral" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Da CVM ao indicador — visão geral
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mapeamento-de-contas-por-setor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mapeamento de contas por setor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mapeamento de contas por setor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#industrial-configtoml-contasindustrial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Industrial — config.toml [contas.industrial]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#financeiro-bancos-configtoml-contasfinanceiro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Financeiro (bancos) — config.toml [contas.financeiro]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#seguradora-configtoml-contasseguradora" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seguradora — config.toml [contas.seguradora]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classificacao-setorial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Classificação setorial
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deteccao-de-contas-especiais-regex" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detecção de contas especiais (regex)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pivot-e-consolidacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pivot e consolidações
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pivot e consolidações">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#otimizacao-de-memoria" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Otimização de memória
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pivot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pivot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fill-de-colunas-ausentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fill de colunas ausentes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#consolidacao-de-caixa-seguradoras" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consolidação de caixa (seguradoras)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolucao-do-lucro-liquido" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolução do Lucro Líquido
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indicadores-por-tier-domain-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicadores por tier (domain layer)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Indicadores por tier (domain layer)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tier-1-rentabilidade-e-bases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 1 — Rentabilidade e bases
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-2-fluxo-de-caixa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 2 — Fluxo de caixa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-3-estrutura-de-capital" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 3 — Estrutura de capital
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-4-alavancagem" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 4 — Alavancagem
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tier-5-ratios-finais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tier 5 — Ratios finais
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#piotroski-f-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Piotroski F-Score
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#beneish-m-score" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Beneish M-Score
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Beneish M-Score">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#os-8-termos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Os 8 termos
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#regras-de-guarda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Regras de guarda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#crescimento-yoy-e-cagr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Crescimento — YoY e CAGR
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Crescimento — YoY e CAGR">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#yoy-year-over-year" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YoY (Year-over-Year)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cagr-compound-annual-growth-rate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CAGR (Compound Annual Growth Rate)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fatores-quantitativos-quality-momentum-risk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fatores quantitativos (Quality · Momentum · Risk)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fatores quantitativos (Quality · Momentum · Risk)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabela-de-fatores" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tabela de fatores
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Implementação
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#por-que-cash_conversion-e-anulado-em-bancos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que CASH_CONVERSION é anulado em bancos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias-academicas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referências acadêmicas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eficiencia-operacional-e-qualidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eficiência operacional e qualidade
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Eficiência operacional e qualidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#por-que-9-sao-anulados-para-bancos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Por que 9 são anulados para bancos?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interpretacao-rapida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretação rápida
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#valuation-historico-e-snapshot-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valuation — histórico e snapshot atual
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Valuation — histórico e snapshot atual">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#agregacao-diaria-anual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Agregação diária → anual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#market-cap-consolidado-on-pn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Market Cap consolidado (ON + PN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#multiplos-calculados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Múltiplos calculados
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#snapshot-atual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Snapshot atual
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#assepsia-setorial-resumo-consolidado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assepsia setorial — resumo consolidado
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Assepsia setorial — resumo consolidado">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#indicadores-industriais-classicos-passo-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicadores industriais clássicos (passo 5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#indicadores-de-eficiencia-passo-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Indicadores de eficiência (passo 10)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valuation-price_aggregator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Valuation (price_aggregator)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scores-passos-7-e-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Scores (passos 7 e 8)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#auditoria-e-data-quality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auditoria e Data Quality
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Auditoria e Data Quality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#auditoria-temporal-transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Auditoria temporal (transformer)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-quality-por-ticker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Quality por ticker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#arredondamentos-e-tipos-de-saida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Arredondamentos e tipos de saída
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Arredondamentos e tipos de saída">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quatro-casas-decimais-ratios-e-percentuais" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quatro casas decimais (ratios e percentuais)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#duas-casas-decimais-valores-monetarios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Duas casas decimais (valores monetários)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#casos-especiais-valuation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Casos especiais (valuation)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencia-cruzada-de-arquivos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Referência cruzada de arquivos
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="synetra-technical-wiki">Synetra Technical Wiki<a class="headerlink" href="#synetra-technical-wiki" title="Permanent link">&para;</a></h1>
+<p><a href="./">Leia em Português</a> · <a href="../WIKI_EN/">Read in English</a></p>
+<p>Referência técnica completa do pipeline ETL do Synetra: como os valores brutos da CVM viram indicadores fundamentalistas, onde cada conta é buscada, e quais regras separam empresas industriais, bancos e seguradoras.</p>
+<p>Este documento é derivado do código real. Cada fórmula cita o arquivo e o trecho onde está implementada.</p>
+<hr />
+<h2 id="sumario">Sumário<a class="headerlink" href="#sumario" title="Permanent link">&para;</a></h2>
+<ol>
+<li><a href="#contratos-e-convencoes">Contratos e convenções</a></li>
+<li><a href="#da-cvm-ao-indicador--visao-geral">Da CVM ao indicador — visão geral</a></li>
+<li><a href="#mapeamento-de-contas-por-setor">Mapeamento de contas por setor</a></li>
+<li><a href="#classificacao-setorial">Classificação setorial</a></li>
+<li><a href="#deteccao-de-contas-especiais-regex">Detecção de contas especiais (regex)</a></li>
+<li><a href="#pivot-e-consolidacoes">Pivot e consolidações</a></li>
+<li><a href="#resolucao-do-lucro-liquido">Resolução do Lucro Líquido</a></li>
+<li><a href="#indicadores-por-tier-domain-layer">Indicadores por tier (domain layer)</a></li>
+<li><a href="#piotroski-f-score">Piotroski F-Score</a></li>
+<li><a href="#beneish-m-score">Beneish M-Score</a></li>
+<li><a href="#crescimento--yoy-e-cagr">Crescimento — YoY e CAGR</a></li>
+<li><a href="#fatores-quantitativos-quality--momentum--risk">Fatores quantitativos (Quality · Momentum · Risk)</a></li>
+<li><a href="#eficiencia-operacional-e-qualidade">Eficiência operacional e qualidade</a></li>
+<li><a href="#valuation--historico-e-snapshot-atual">Valuation — histórico e snapshot atual</a></li>
+<li><a href="#assepsia-setorial--resumo-consolidado">Assepsia setorial — resumo consolidado</a></li>
+<li><a href="#auditoria-e-data-quality">Auditoria e Data Quality</a></li>
+<li><a href="#arredondamentos-e-tipos-de-saida">Arredondamentos e tipos de saída</a></li>
+<li><a href="#referencia-cruzada-de-arquivos">Referência cruzada de arquivos</a></li>
+</ol>
+<hr />
+<h2 id="contratos-e-convencoes">Contratos e convenções<a class="headerlink" href="#contratos-e-convencoes" title="Permanent link">&para;</a></h2>
+<p>Antes das fórmulas, os contratos que mantêm o pipeline previsível.</p>
+<table>
+<thead>
+<tr>
+<th>Convenção</th>
+<th>Regra</th>
+<th>Motivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Domínio puro</td>
+<td>Tudo em <code>synetra/domain/</code> opera só com expressões Polars. Sem I/O, sem config.</td>
+<td>Facilita teste isolado por fórmula.</td>
+</tr>
+<tr>
+<td>Config imutável</td>
+<td><code>SynetraConfig</code> é <code>frozen=True</code>. Valida antes de qualquer I/O.</td>
+<td>Config quebrada aborta cedo, não no meio do pipeline.</td>
+</tr>
+<tr>
+<td>Valores monetários</td>
+<td>Escala <code>MIL</code> do CSV CVM é multiplicada por 1000 para virar unidade (R$).</td>
+<td><code>synetra/loader.py → _apply_monetary_scale</code>.</td>
+</tr>
+<tr>
+<td>Divisão segura</td>
+<td>Denominador zero ou nulo retorna <code>None</code>, nunca <code>inf</code> ou <code>NaN</code>.</td>
+<td><code>synetra/domain/indicators.py → safe_div</code>.</td>
+</tr>
+<tr>
+<td>Tipos de saída</td>
+<td>Ratios com 4 casas decimais, valores monetários com 2, Market Cap sem decimais.</td>
+<td><code>synetra/transformer.py → _COLS_ROUND_4D/_COLS_ROUND_2D</code>.</td>
+</tr>
+<tr>
+<td>Assepsia setorial</td>
+<td>Métrica que não se aplica a um setor é <code>null</code>, não zero.</td>
+<td>Evita rankings misturarem empresas em métrica irrelevante.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="notacao-usada">Notação usada<a class="headerlink" href="#notacao-usada" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Expressões em LaTeX ($<code>\cdot</code>$) para matemática.</li>
+<li>Blocos <code>python</code> quando é essencial mostrar a expressão Polars.</li>
+<li><code>null</code> significa <code>None</code> (Polars) — explicitamente ausente, diferente de zero.</li>
+<li>"Categoria" se refere ao enum <code>Categoria</code> (<code>INDUSTRIAL</code>, <code>FINANCEIRO</code>, <code>SEGURADORA</code>).</li>
+</ul>
+<hr />
+<h2 id="da-cvm-ao-indicador-visao-geral">Da CVM ao indicador — visão geral<a class="headerlink" href="#da-cvm-ao-indicador-visao-geral" title="Permanent link">&para;</a></h2>
+<p>O pipeline completo faz quatro travessias sobre os dados da CVM antes de produzir a série histórica. Cada travessia adiciona informação sem reescrever o que veio antes.</p>
+<pre class="mermaid"><code>graph LR
+    subgraph CVM["Dados brutos da CVM"]
+        ZIP["ZIPs por ano&lt;br&gt;DFP + FRE + Cadastro"]
+    end
+
+    subgraph P1["1. Preparação"]
+        PROJ["Projection pushdown&lt;br&gt;(5 colunas nucleares)"]
+        SETOR["Enriquecimento setorial&lt;br&gt;+ classificação em 3 categorias"]
+        REGEX["Detecção de contas&lt;br&gt;especiais (regex)"]
+        MAP["Mapa código → nome&lt;br&gt;(por setor)"]
+    end
+
+    subgraph P2["2. Pivot"]
+        PIVOT["pivot VL_CONTA&lt;br&gt;por CONTA_NOME"]
+        FILL["Preenche colunas&lt;br&gt;faltantes com 0.0"]
+        SEGUROS["Consolidação&lt;br&gt;caixa seguradoras"]
+        LUCRO["Resolução do&lt;br&gt;Lucro Líquido"]
+        FRE["Merge FRE&lt;br&gt;(qtde de ações)"]
+    end
+
+    subgraph P3["3. Cálculos"]
+        TIER["Tiers 1 a 5&lt;br&gt;(domain layer)"]
+        SHIFT["Shifts e rolling&lt;br&gt;em lote único"]
+        FBEN["F-Score e&lt;br&gt;Beneish"]
+        QUANT["Growth + Quant&lt;br&gt;+ Eficiência"]
+    end
+
+    subgraph P4["4. Finalização"]
+        CLEAN["Drop auxiliares"]
+        ROUND["Arredondamento"]
+        RENAME["LUCRO_FINAL → LUCRO_LIQUIDO"]
+    end
+
+    CVM --&gt; P1 --&gt; P2 --&gt; P3 --&gt; P4
+
+    style CVM fill:#161b22,stroke:#30363d,color:#e6edf3
+    style P1 fill:#161b22,stroke:#30363d,color:#e6edf3
+    style P2 fill:#161b22,stroke:#30363d,color:#e6edf3
+    style P3 fill:#161b22,stroke:#30363d,color:#e6edf3
+    style P4 fill:#161b22,stroke:#30363d,color:#e6edf3</code></pre>
+<p>Os 11 passos do <code>FinancialTransformer.calculate_indicators</code> (em <code>synetra/transformer.py</code>):</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Passo</th>
+<th>Responsabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>_prepare_history</code></td>
+<td>Projection pushdown + setores + regex + mapa de contas</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>_pivot_and_consolidate</code></td>
+<td>Pivot, fill, consolidação de caixa, resolução de lucro, merge FRE</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>calculate_all_indicators</code></td>
+<td>Tiers 1 a 5 (domain layer)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>_merge_tickers</code></td>
+<td>Join com <code>mapa_tickers.csv</code> + seleção de colunas</td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>_apply_sector_assepsia</code></td>
+<td>Anulação de métricas industriais para bancos/seguradoras</td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>_prepare_shifts</code></td>
+<td>Geração de colunas <code>_prev</code>, <code>_BASE</code>, rolling stats num único <code>with_columns</code></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>_calculate_fscore</code></td>
+<td>Piotroski F-Score (9 critérios, industrial)</td>
+</tr>
+<tr>
+<td>8</td>
+<td><code>_calculate_beneish</code></td>
+<td>Beneish M-Score (8 termos, industrial)</td>
+</tr>
+<tr>
+<td>9</td>
+<td><code>_calculate_growth_and_quant</code></td>
+<td>YoY, CAGR, 5 fatores quantitativos</td>
+</tr>
+<tr>
+<td>10</td>
+<td><code>_calculate_efficiency_and_quality</code></td>
+<td>10 indicadores de eficiência</td>
+</tr>
+<tr>
+<td>11</td>
+<td><code>_round_and_finalize</code></td>
+<td>Drop auxiliares + arredondamento + rename público</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mapeamento-de-contas-por-setor">Mapeamento de contas por setor<a class="headerlink" href="#mapeamento-de-contas-por-setor" title="Permanent link">&para;</a></h2>
+<p>Os códigos de conta (<code>CD_CONTA</code>) da CVM mudam de significado dependendo do setor. Um banco usa <code>3.09</code> para lucro líquido; uma indústria usa <code>3.11</code>. O Synetra mantém três mapas independentes em <code>config.toml</code> e aplica o mapa correto depois da classificação setorial.</p>
+<p>A junção é feita com um <strong>single join global</strong> em <code>synetra/transformer.py → map_accounts</code>: todos os mapas viram um único DataFrame de lookup com <code>(CATEGORIA, CD_CONTA) → CONTA_NOME</code>, e um <code>join</code> resolve tudo de uma vez — sem loops Python.</p>
+<h3 id="industrial-configtoml-contasindustrial">Industrial — <code>config.toml [contas.industrial]</code><a class="headerlink" href="#industrial-configtoml-contasindustrial" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Código CVM</th>
+<th>Nome interno</th>
+<th>O que representa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td><code>ATIVO_TOTAL</code></td>
+<td>Soma total de ativos (circulante + não circulante)</td>
+</tr>
+<tr>
+<td><code>1.01</code></td>
+<td><code>ATIVO_CIRCULANTE</code></td>
+<td>Ativos de curto prazo (caixa, receber, estoques)</td>
+</tr>
+<tr>
+<td><code>1.01.01</code> e <code>1.01.02</code></td>
+<td><code>CAIXA_EQUIVALENTES</code></td>
+<td>Caixa e equivalentes (duas linhas agregadas via <code>sum</code>)</td>
+</tr>
+<tr>
+<td><code>1.01.03</code></td>
+<td><code>CONTAS_A_RECEBER</code></td>
+<td>Clientes (trade receivables)</td>
+</tr>
+<tr>
+<td><code>1.02</code></td>
+<td><code>ATIVO_NAO_CIRCULANTE</code></td>
+<td>Ativos de longo prazo</td>
+</tr>
+<tr>
+<td><code>1.02.03</code></td>
+<td><code>IMOBILIZADO</code></td>
+<td>PP&amp;E (Property, Plant &amp; Equipment)</td>
+</tr>
+<tr>
+<td><code>2.01</code></td>
+<td><code>PASSIVO_CIRCULANTE</code></td>
+<td>Dívidas e obrigações de curto prazo</td>
+</tr>
+<tr>
+<td><code>2.01.04</code></td>
+<td><code>DIVIDA_CP</code></td>
+<td>Empréstimos e financiamentos de curto prazo</td>
+</tr>
+<tr>
+<td><code>2.02.01</code></td>
+<td><code>DIVIDA_LP</code></td>
+<td>Empréstimos e financiamentos de longo prazo</td>
+</tr>
+<tr>
+<td><code>2.03</code></td>
+<td><code>PATRIMONIO_LIQUIDO</code></td>
+<td>PL da controladora</td>
+</tr>
+<tr>
+<td><code>3.01</code></td>
+<td><code>RECEITA_LIQUIDA</code></td>
+<td>Receita operacional líquida</td>
+</tr>
+<tr>
+<td><code>3.03</code></td>
+<td><code>RESULTADO_BRUTO</code> → <code>LUCRO_BRUTO</code></td>
+<td>Receita − CPV</td>
+</tr>
+<tr>
+<td><code>3.04</code></td>
+<td><code>DESPESAS_OPERACIONAIS</code></td>
+<td>Despesas gerais, administrativas e de vendas</td>
+</tr>
+<tr>
+<td><code>3.05</code></td>
+<td><code>EBIT</code></td>
+<td>Resultado operacional</td>
+</tr>
+<tr>
+<td><code>3.09</code></td>
+<td><code>LUCRO_LIQUIDO_BCO</code></td>
+<td>Fallback (uso para indústrias que usem layout bancário)</td>
+</tr>
+<tr>
+<td><code>3.09.01</code></td>
+<td><code>LUCRO_CONTROLADORA_BCO</code></td>
+<td>Fallback de controladora</td>
+</tr>
+<tr>
+<td><code>3.11</code></td>
+<td><code>LUCRO_LIQUIDO</code></td>
+<td>Lucro líquido consolidado</td>
+</tr>
+<tr>
+<td><code>3.11.01</code></td>
+<td><code>LUCRO_CONTROLADORA</code></td>
+<td>Lucro líquido da controladora (fonte preferida)</td>
+</tr>
+<tr>
+<td><code>6.01</code></td>
+<td><code>FCO</code></td>
+<td>Fluxo de caixa das atividades operacionais</td>
+</tr>
+<tr>
+<td><code>6.02</code></td>
+<td><code>FCI</code></td>
+<td>Fluxo de caixa das atividades de investimento</td>
+</tr>
+<tr>
+<td><code>6.03</code></td>
+<td><code>FCF</code></td>
+<td>Fluxo de caixa das atividades de financiamento</td>
+</tr>
+</tbody>
+</table>
+<h3 id="financeiro-bancos-configtoml-contasfinanceiro">Financeiro (bancos) — <code>config.toml [contas.financeiro]</code><a class="headerlink" href="#financeiro-bancos-configtoml-contasfinanceiro" title="Permanent link">&para;</a></h3>
+<p>Bancos não têm <code>ATIVO_CIRCULANTE</code>/<code>PASSIVO_CIRCULANTE</code> no sentido industrial. O layout bancário da CVM expõe o PL em contas diferentes.</p>
+<table>
+<thead>
+<tr>
+<th>Código CVM</th>
+<th>Nome interno</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td><code>ATIVO_TOTAL</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>1.01.01</code></td>
+<td><code>CAIXA_EQUIVALENTES</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>1.01.08</code></td>
+<td><code>CONTAS_A_RECEBER</code></td>
+<td>Operações de crédito a clientes</td>
+</tr>
+<tr>
+<td><code>1.06</code></td>
+<td><code>IMOBILIZADO</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>2.01</code></td>
+<td><code>PASSIVO_CIRCULANTE</code></td>
+<td>Exigível a curto prazo</td>
+</tr>
+<tr>
+<td><code>2.07</code> e <code>2.08</code></td>
+<td><code>PATRIMONIO_LIQUIDO</code></td>
+<td>Duas contas agregadas — PL do grupo bancário</td>
+</tr>
+<tr>
+<td><code>3.01</code></td>
+<td><code>RECEITA_LIQUIDA</code></td>
+<td>Receita de intermediação financeira</td>
+</tr>
+<tr>
+<td><code>3.03</code></td>
+<td><code>RESULTADO_BRUTO</code> → <code>LUCRO_BRUTO</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>3.04</code></td>
+<td><code>DESPESAS_OPERACIONAIS</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>3.05</code></td>
+<td><code>EBIT</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>3.09</code></td>
+<td><code>LUCRO_LIQUIDO</code></td>
+<td><strong>Layout bancário</strong>: conta principal</td>
+</tr>
+<tr>
+<td><code>3.09.01</code></td>
+<td><code>LUCRO_CONTROLADORA</code></td>
+<td>Fonte preferida para LPA de bancos</td>
+</tr>
+<tr>
+<td><code>3.11</code> e <code>3.11.01</code></td>
+<td><code>LUCRO_LIQUIDO_BCO</code> / <code>LUCRO_CONTROLADORA_BCO</code></td>
+<td>Fallbacks</td>
+</tr>
+<tr>
+<td><code>6.01</code>, <code>6.02</code>, <code>6.03</code></td>
+<td><code>FCO</code>, <code>FCI</code>, <code>FCF</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="seguradora-configtoml-contasseguradora">Seguradora — <code>config.toml [contas.seguradora]</code><a class="headerlink" href="#seguradora-configtoml-contasseguradora" title="Permanent link">&para;</a></h3>
+<p>Seguradoras têm aplicações financeiras massivas. O Synetra consolida caixa + aplicações de curto e longo prazo num único <code>CAIXA_EQUIVALENTES</code> para refletir a liquidez real.</p>
+<table>
+<thead>
+<tr>
+<th>Código CVM</th>
+<th>Nome interno</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td><code>ATIVO_TOTAL</code></td>
+</tr>
+<tr>
+<td><code>1.01</code></td>
+<td><code>ATIVO_CIRCULANTE</code></td>
+</tr>
+<tr>
+<td><code>1.01.01</code></td>
+<td><code>CAIXA_EQUIVALENTES</code></td>
+</tr>
+<tr>
+<td><code>1.01.02</code></td>
+<td><code>APLICACOES_CP</code> (somado ao caixa em pós-pivot)</td>
+</tr>
+<tr>
+<td><code>1.01.03</code></td>
+<td><code>CONTAS_A_RECEBER</code></td>
+</tr>
+<tr>
+<td><code>1.02</code></td>
+<td><code>ATIVO_NAO_CIRCULANTE</code></td>
+</tr>
+<tr>
+<td><code>1.02.01.01</code></td>
+<td><code>APLICACOES_LP</code> (somado ao caixa em pós-pivot)</td>
+</tr>
+<tr>
+<td><code>1.02.03</code></td>
+<td><code>IMOBILIZADO</code></td>
+</tr>
+<tr>
+<td><code>2.01</code></td>
+<td><code>PASSIVO_CIRCULANTE</code></td>
+</tr>
+<tr>
+<td><code>2.03</code></td>
+<td><code>PATRIMONIO_LIQUIDO</code></td>
+</tr>
+<tr>
+<td><code>3.01</code> e <code>3.01.01</code></td>
+<td><code>RECEITA_LIQUIDA</code></td>
+</tr>
+<tr>
+<td><code>3.03</code></td>
+<td><code>RESULTADO_BRUTO</code> → <code>LUCRO_BRUTO</code></td>
+</tr>
+<tr>
+<td><code>3.04</code></td>
+<td><code>DESPESAS_OPERACIONAIS</code></td>
+</tr>
+<tr>
+<td><code>3.09</code>, <code>3.09.01</code></td>
+<td><code>LUCRO_LIQUIDO_BCO</code>, <code>LUCRO_CONTROLADORA_BCO</code></td>
+</tr>
+<tr>
+<td><code>3.11</code>, <code>3.11.01</code></td>
+<td><code>LUCRO_LIQUIDO</code>, <code>LUCRO_CONTROLADORA</code></td>
+</tr>
+<tr>
+<td><code>6.01</code>, <code>6.02</code>, <code>6.03</code></td>
+<td><code>FCO</code>, <code>FCI</code>, <code>FCF</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="classificacao-setorial">Classificação setorial<a class="headerlink" href="#classificacao-setorial" title="Permanent link">&para;</a></h2>
+<p>A categoria de uma empresa é decidida por keywords no campo <code>SETOR_ATIV</code> do cadastro CVM.</p>
+<p>Arquivo: <code>synetra/transformer.py → classify_sectors</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">if</span> <span class="n">SETOR_ATIV</span> <span class="n">contém</span> <span class="n">qualquer</span> <span class="n">keyword</span> <span class="n">de</span> <span class="p">[</span><span class="n">setores</span><span class="o">.</span><span class="n">financeiro</span><span class="p">]:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">CATEGORIA</span> <span class="o">=</span> <span class="n">FINANCEIRO</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">elif</span> <span class="n">SETOR_ATIV</span> <span class="n">contém</span> <span class="n">qualquer</span> <span class="n">keyword</span> <span class="n">de</span> <span class="p">[</span><span class="n">setores</span><span class="o">.</span><span class="n">seguradora</span><span class="p">]:</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="n">CATEGORIA</span> <span class="o">=</span> <span class="n">SEGURADORA</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="n">CATEGORIA</span> <span class="o">=</span> <span class="n">INDUSTRIAL</span>
+</span></code></pre></div>
+<p>Keywords ativas em <code>config.toml</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Keywords</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Financeiro</td>
+<td><code>BANCO</code>, <code>ARRENDAMENTO</code>, <code>FACTORING</code>, <code>CREDITO</code>, <code>SECURITIZACAO</code></td>
+</tr>
+<tr>
+<td>Seguradora</td>
+<td><code>SEGURO</code>, <code>SEGURADORA</code>, <code>PREVIDENCIA</code>, <code>CAPITALIZACAO</code></td>
+</tr>
+<tr>
+<td>Industrial</td>
+<td>(fallback — qualquer empresa que não bata nas regras acima)</td>
+</tr>
+</tbody>
+</table>
+<p>A comparação é case-insensitive (o prefixo regex <code>(?i)</code> é prepended em tempo de execução) e usa <code>str.contains</code>, então "BANCO DO BRASIL" e "BCO DO BRASIL" casam.</p>
+<hr />
+<h2 id="deteccao-de-contas-especiais-regex">Detecção de contas especiais (regex)<a class="headerlink" href="#deteccao-de-contas-especiais-regex" title="Permanent link">&para;</a></h2>
+<p>Três tipos de conta não seguem um código fixo — o nome muda entre empresas. A CVM permite a descrição (<code>DS_CONTA</code>) como texto livre dentro da DFC. O Synetra normaliza o texto (uppercase sem acento) e aplica regex para extrair:</p>
+<p>Arquivo: <code>synetra/transformer.py → detect_special_accounts</code>.
+Regex em <code>config.toml [regex]</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Conta virtual</th>
+<th>Prefixo CVM</th>
+<th>Regex na descrição</th>
+<th>Exclusões</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DEPREC_AMORT</code></td>
+<td><code>6.01</code> (FCO)</td>
+<td><code>DEPRECIA\|AMORTIZA</code></td>
+<td>não pode conter <code>AJUSTE</code> ou <code>JUROS</code></td>
+</tr>
+<tr>
+<td><code>CAPEX_VAL</code></td>
+<td><code>6.02</code> (FCI)</td>
+<td><code>AQUISIC\|ADIC\|COMPRA</code> <strong>E</strong> <code>IMOBILIZADO\|INTANGIVEL</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DIVIDENDOS_PAGOS</code></td>
+<td><code>6.03</code> (FCF)</td>
+<td><code>DIVIDENDO\|JURO SOBRE CAPITAL\|JUROS SOBRE CAPITAL\|JURO S CAPITAL\|JUROS S CAPITAL\|JCP</code></td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>EBIT</code> (seguradora)</td>
+<td>qualquer</td>
+<td><code>RESULTADO ANTES DO RESULTADO FINANCEIRO\|RESULTADO ANTES DAS RECEITAS</code></td>
+<td>só aplica quando <code>CATEGORIA = SEGURADORA</code></td>
+</tr>
+</tbody>
+</table>
+<p>A normalização do texto acontece em <code>synetra/utils.py → clean_text_expr</code>: remove acentos (ÁÀÂÃÄ → A, etc), uppercase e strip, tudo via expressões Polars nativas (motor Rust, sem overhead Python).</p>
+<hr />
+<h2 id="pivot-e-consolidacoes">Pivot e consolidações<a class="headerlink" href="#pivot-e-consolidacoes" title="Permanent link">&para;</a></h2>
+<p>Depois de mapear códigos para nomes, o DataFrame ainda está em formato longo (uma linha por conta). O pivot transforma em formato largo (uma coluna por conta).</p>
+<p>Arquivo: <code>synetra/transformer.py → _pivot_and_consolidate</code>.</p>
+<h3 id="otimizacao-de-memoria">Otimização de memória<a class="headerlink" href="#otimizacao-de-memoria" title="Permanent link">&para;</a></h3>
+<p>Antes do pivot, colunas de baixa cardinalidade são convertidas para <code>Categorical</code>:
+<code>CNPJ_CIA</code>, <code>CATEGORIA</code>, <code>SETOR_ATIV</code>, <code>CONTA_NOME</code>. Em um dataset com ~380 tickers × 16 anos, isso reduz o footprint de memória em torno de 70%.</p>
+<h3 id="pivot">Pivot<a class="headerlink" href="#pivot" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">pivot</span><span class="p">(</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">values</span><span class="o">=</span><span class="s2">&quot;VL_CONTA&quot;</span><span class="p">,</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;CNPJ_CIA&quot;</span><span class="p">,</span> <span class="s2">&quot;ANO&quot;</span><span class="p">,</span> <span class="s2">&quot;CATEGORIA&quot;</span><span class="p">,</span> <span class="s2">&quot;SETOR_ATIV&quot;</span><span class="p">],</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">on</span><span class="o">=</span><span class="s2">&quot;CONTA_NOME&quot;</span><span class="p">,</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="n">aggregate_function</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span><span class="p">,</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">)</span>
+</span></code></pre></div>
+<p>A agregação <code>sum</code> é necessária porque algumas contas aparecem em múltiplas linhas do CSV (ex: <code>1.01.01</code> e <code>1.01.02</code> ambos mapeiam para <code>CAIXA_EQUIVALENTES</code> no layout industrial).</p>
+<h3 id="fill-de-colunas-ausentes">Fill de colunas ausentes<a class="headerlink" href="#fill-de-colunas-ausentes" title="Permanent link">&para;</a></h3>
+<p>Após o pivot, <code>_ensure_all_account_columns</code> garante que todas as colunas esperadas existam. Se um setor nunca teve uma conta específica num ano, a coluna é criada com <code>0.0</code>. Isso evita <code>KeyError</code> nos cálculos downstream.</p>
+<h3 id="consolidacao-de-caixa-seguradoras">Consolidação de caixa (seguradoras)<a class="headerlink" href="#consolidacao-de-caixa-seguradoras" title="Permanent link">&para;</a></h3>
+<p>$$
+\text{CAIXA EQUIVALENTES}_{\text{seguradora}} = \text{Caixa} + \text{Aplicações CP} + \text{Aplicações LP}
+$$</p>
+<p>Para os outros setores, <code>CAIXA_EQUIVALENTES</code> fica como está.</p>
+<p>Base: seguradoras mantêm reservas técnicas em aplicações financeiras líquidas. Ignorar isso subestima a liquidez da empresa em ordens de magnitude.</p>
+<hr />
+<h2 id="resolucao-do-lucro-liquido">Resolução do Lucro Líquido<a class="headerlink" href="#resolucao-do-lucro-liquido" title="Permanent link">&para;</a></h2>
+<p>O campo <code>LUCRO_FINAL</code> (renomeado para <code>LUCRO_LIQUIDO</code> no output) segue uma hierarquia de 4 níveis. A preferência é usar o <strong>lucro da controladora</strong> (exclui participação de não controladores) para alinhar LPA/P/L com o que analistas e provedores de dados reportam.</p>
+<p>Arquivo: <code>synetra/transformer.py → _resolve_net_income</code>.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">LUCRO_FINAL</span> <span class="o">=</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">LUCRO_CONTROLADORA</span>         <span class="n">se</span> <span class="o">!=</span> <span class="mi">0</span>   <span class="p">(</span><span class="n">conta</span> <span class="mf">3.11.01</span><span class="p">,</span> <span class="n">industrial</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="k">else</span> <span class="n">LUCRO_CONTROLADORA_BCO</span> <span class="n">se</span> <span class="o">!=</span> <span class="mi">0</span>  <span class="p">(</span><span class="n">conta</span> <span class="mf">3.09.01</span><span class="p">,</span> <span class="n">bancário</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">else</span> <span class="n">LUCRO_LIQUIDO</span>         <span class="n">se</span> <span class="o">!=</span> <span class="mi">0</span>   <span class="p">(</span><span class="n">conta</span> <span class="mf">3.11</span><span class="p">,</span> <span class="n">industrial</span> <span class="n">consolidado</span><span class="p">)</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">else</span> <span class="n">LUCRO_LIQUIDO_BCO</span>               <span class="p">(</span><span class="n">conta</span> <span class="mf">3.09</span><span class="p">,</span> <span class="n">bancário</span> <span class="n">consolidado</span><span class="p">)</span>
+</span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Nível</th>
+<th>Campo</th>
+<th>Fonte CVM</th>
+<th>Quando é usado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>LUCRO_CONTROLADORA</code></td>
+<td><code>3.11.01</code></td>
+<td>Preferência absoluta quando existe e é não-zero</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>LUCRO_CONTROLADORA_BCO</code></td>
+<td><code>3.09.01</code></td>
+<td>Indústrias que usem layout bancário</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>LUCRO_LIQUIDO</code></td>
+<td><code>3.11</code></td>
+<td>Consolidado total (quando a empresa não reporta controladora separada)</td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>LUCRO_LIQUIDO_BCO</code></td>
+<td><code>3.09</code></td>
+<td>Fallback final</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="indicadores-por-tier-domain-layer">Indicadores por tier (domain layer)<a class="headerlink" href="#indicadores-por-tier-domain-layer" title="Permanent link">&para;</a></h2>
+<p>Todos os indicadores abaixo vivem em <code>synetra/domain/indicators.py</code> como funções puras. Rodam em cinco tiers com dependência em cadeia — um tier só pode usar colunas produzidas pelos tiers anteriores.</p>
+<pre class="mermaid"><code>graph TD
+    T1["Tier 1 — Rentabilidade&lt;br&gt;ROE · ROA · LPA · VPA · Giro&lt;br&gt;Margens · Accruals · CAPEX"]
+    T2["Tier 2 — Fluxo de caixa&lt;br&gt;FCL · Payout · EBITDA"]
+    T3["Tier 3 — Estrutura de capital&lt;br&gt;Margem EBITDA · Dívida Total&lt;br&gt;Liquidez Corrente"]
+    T4["Tier 4 — Alavancagem&lt;br&gt;Dívida Líquida · Dívida/PL"]
+    T5["Tier 5 — Ratios finais&lt;br&gt;DL/EBITDA · ROIC · Altman Z''"]
+
+    T1 --&gt; T2 --&gt; T3 --&gt; T4 --&gt; T5
+
+    style T1 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style T2 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style T3 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style T4 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style T5 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3</code></pre>
+<h3 id="tier-1-rentabilidade-e-bases">Tier 1 — Rentabilidade e bases<a class="headerlink" href="#tier-1-rentabilidade-e-bases" title="Permanent link">&para;</a></h3>
+<p>Função: <code>get_tier1_expressions()</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Fórmula</th>
+<th>Setores</th>
+<th>Contas usadas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ROE</code></td>
+<td>$<code>\dfrac{\text{Lucro Líquido}}{\text{Patrimônio Líquido}}</code>$</td>
+<td>Todos</td>
+<td><code>LUCRO_FINAL</code>, <code>PATRIMONIO_LIQUIDO</code></td>
+</tr>
+<tr>
+<td><code>ROA</code></td>
+<td>$<code>\dfrac{\text{Lucro Líquido}}{\text{Ativo Total}}</code>$</td>
+<td>Todos</td>
+<td><code>LUCRO_FINAL</code>, <code>ATIVO_TOTAL</code></td>
+</tr>
+<tr>
+<td><code>LPA</code></td>
+<td>$<code>\dfrac{\text{Lucro Líquido}}{\text{Qtde de Ações}}</code>$</td>
+<td>Todos</td>
+<td><code>LUCRO_FINAL</code>, <code>QTDE_ACOES</code> (FRE)</td>
+</tr>
+<tr>
+<td><code>VPA</code></td>
+<td>$<code>\dfrac{\text{PL}}{\text{Qtde de Ações}}</code>$</td>
+<td>Todos</td>
+<td><code>PATRIMONIO_LIQUIDO</code>, <code>QTDE_ACOES</code></td>
+</tr>
+<tr>
+<td><code>GIRO_ATIVO</code></td>
+<td>$<code>\dfrac{\text{Receita Líquida}}{\text{Ativo Total}}</code>$</td>
+<td>Todos</td>
+<td><code>RECEITA_LIQUIDA</code>, <code>ATIVO_TOTAL</code></td>
+</tr>
+<tr>
+<td><code>ALAVANCAGEM_LP</code></td>
+<td>$<code>\dfrac{\text{Dívida LP}}{\text{Ativo Total}}</code>$</td>
+<td>Todos</td>
+<td><code>DIVIDA_LP</code>, <code>ATIVO_TOTAL</code> (auxiliar; removida na finalização)</td>
+</tr>
+<tr>
+<td><code>ACCRUALS</code></td>
+<td>$<code>\text{Lucro Líquido} - \text{FCO}</code>$</td>
+<td>Todos</td>
+<td><code>LUCRO_FINAL</code>, <code>FCO</code></td>
+</tr>
+<tr>
+<td><code>ACCRUAL_RATIO</code></td>
+<td>$<code>\dfrac{\text{Lucro Líquido} - \text{FCO}}{\text{Ativo Total}}</code>$</td>
+<td>Industrial</td>
+<td><code>LUCRO_FINAL</code>, <code>FCO</code>, <code>ATIVO_TOTAL</code></td>
+</tr>
+<tr>
+<td><code>GP_A</code></td>
+<td>$<code>\dfrac{\text{Lucro Bruto}}{\text{Ativo Total}}</code>$</td>
+<td>Industrial</td>
+<td><code>RESULTADO_BRUTO</code>, <code>ATIVO_TOTAL</code></td>
+</tr>
+<tr>
+<td><code>MARGEM_EBIT</code></td>
+<td>$<code>\dfrac{\text{EBIT}}{\text{Receita Líquida}}</code>$</td>
+<td>Todos (mas anulada em bancos)</td>
+<td><code>EBIT</code>, <code>RECEITA_LIQUIDA</code></td>
+</tr>
+<tr>
+<td><code>MARGEM_LIQUIDA</code></td>
+<td>$<code>\dfrac{\text{Lucro Líquido}}{\text{Receita Líquida}}</code>$</td>
+<td>Todos</td>
+<td><code>LUCRO_FINAL</code>, <code>RECEITA_LIQUIDA</code></td>
+</tr>
+<tr>
+<td><code>MARGEM_BRUTA</code></td>
+<td>$<code>\dfrac{\text{Lucro Bruto}}{\text{Receita Líquida}}</code>$</td>
+<td>Todos (mas anulada em bancos/seguradoras)</td>
+<td><code>RESULTADO_BRUTO</code>, <code>RECEITA_LIQUIDA</code></td>
+</tr>
+<tr>
+<td><code>CAPEX</code></td>
+<td><code>CAPEX_VAL</code> (via regex)</td>
+<td>Industrial + Seguradora</td>
+<td>detectado pela regex no passo <code>detect_special_accounts</code></td>
+</tr>
+<tr>
+<td><code>DEPREC_AMORT</code></td>
+<td><code>DEPREC_AMORT</code> (via regex)</td>
+<td>Industrial + Seguradora</td>
+<td>idem</td>
+</tr>
+<tr>
+<td><code>PROVENTOS</code></td>
+<td>$<code>\lvert\text{Dividendos Pagos}\rvert</code>$</td>
+<td>Todos</td>
+<td><code>DIVIDENDOS_PAGOS</code> (regex)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tier-2-fluxo-de-caixa">Tier 2 — Fluxo de caixa<a class="headerlink" href="#tier-2-fluxo-de-caixa" title="Permanent link">&para;</a></h3>
+<p>Função: <code>get_tier2_expressions()</code>.</p>
+<p><strong>FCL — Free Cash Flow</strong></p>
+<p>Tem lógica diferente por categoria. CAPEX já vem negativo na DFC, então soma equivale a subtração matemática.</p>
+<p>$$
+\text{FCL} = \begin{cases}
+\text{FCO} + \text{FCI} &amp; \text{se CATEGORIA} = \text{FINANCEIRO} \
+\text{FCO} + \text{CAPEX} &amp; \text{caso contrário}
+\end{cases}
+$$</p>
+<p>Bancos não têm CAPEX "físico"; o fluxo de investimentos inteiro (aplicações interbancárias, títulos) faz parte do core business.</p>
+<p><strong>Payout</strong></p>
+<p>$$
+\text{PAYOUT} = \dfrac{\text{PROVENTOS}}{\text{Lucro Líquido}}
+$$</p>
+<p>Denominador zero ou negativo → <code>null</code> (via <code>safe_div</code>).</p>
+<p><strong>EBITDA</strong></p>
+<p>$$
+\text{EBITDA} = \text{EBIT} + |\text{Depreciação e Amortização}|
+$$</p>
+<p>O <code>fill_null(0)</code> evita perder EBITDA quando a empresa não expõe D&amp;A separadamente.</p>
+<h3 id="tier-3-estrutura-de-capital">Tier 3 — Estrutura de capital<a class="headerlink" href="#tier-3-estrutura-de-capital" title="Permanent link">&para;</a></h3>
+<p>Função: <code>get_tier3_expressions()</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Fórmula</th>
+<th>Setores</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARGEM_EBITDA</code></td>
+<td>$<code>\dfrac{\text{EBITDA}}{\text{Receita Líquida}}</code>$</td>
+<td>Todos (mas anulada em bancos)</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>DIVIDA_TOTAL</code></td>
+<td>$<code>\text{Dívida CP} + \text{Dívida LP}</code>$ (industrial) $<code>\mid</code>$ $<code>0</code>$ (seguradora) $<code>\mid</code>$ <code>null</code> (financeiro)</td>
+<td>varia</td>
+<td>Bancos têm "dívida" como matéria-prima, não operacional</td>
+</tr>
+<tr>
+<td><code>LIQUIDEZ_CORRENTE</code></td>
+<td>$<code>\dfrac{\text{Ativo Circulante}}{\text{Passivo Circulante}}</code>$</td>
+<td>Industrial</td>
+<td><code>null</code> para bancos e seguradoras</td>
+</tr>
+</tbody>
+</table>
+<p>Renomeada no <code>_merge_tickers</code>: <code>DIVIDA_TOTAL</code> vira <code>DIVIDA_BRUTA</code> no output público.</p>
+<h3 id="tier-4-alavancagem">Tier 4 — Alavancagem<a class="headerlink" href="#tier-4-alavancagem" title="Permanent link">&para;</a></h3>
+<p>Função: <code>get_tier4_expressions()</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Fórmula</th>
+<th>Setores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DIVIDA_LIQUIDA</code></td>
+<td>$<code>\text{Dívida Total} - \text{Caixa e Equivalentes}</code>$</td>
+<td>Industrial</td>
+</tr>
+<tr>
+<td></td>
+<td>$<code>0 - \text{Caixa}</code>$</td>
+<td>Seguradora</td>
+</tr>
+<tr>
+<td></td>
+<td><code>null</code></td>
+<td>Financeiro</td>
+</tr>
+<tr>
+<td><code>DIVIDA_PL</code></td>
+<td>$<code>\dfrac{\text{Dívida Total}}{\text{Patrimônio Líquido}}</code>$</td>
+<td>Industrial</td>
+</tr>
+<tr>
+<td></td>
+<td>$<code>0</code>$</td>
+<td>Seguradora</td>
+</tr>
+<tr>
+<td></td>
+<td><code>null</code></td>
+<td>Financeiro</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tier-5-ratios-finais">Tier 5 — Ratios finais<a class="headerlink" href="#tier-5-ratios-finais" title="Permanent link">&para;</a></h3>
+<p>Função: <code>get_tier5_expressions()</code>.</p>
+<p><strong>DL/EBITDA</strong></p>
+<p>$$
+\text{DL/EBITDA} = \dfrac{\text{Dívida Líquida}}{\text{EBITDA}}
+$$</p>
+<p>Aplicável a industriais e seguradoras. <code>null</code> para bancos.</p>
+<p><strong>ROIC — Return on Invested Capital (Damodaran)</strong></p>
+<p>$$
+\text{ROIC} = \dfrac{\text{EBIT} \times (1 - t)}{\text{PL} + \text{Dívida Bruta}}
+$$</p>
+<p>Onde $<code>t = 0,34</code>$ é a alíquota combinada IR + CSLL no Brasil (Lei 9.249/95 e Lei 9.316/96), definida em <code>BRAZIL_TAX_RATE</code>. Aplicável só a industriais.</p>
+<p><strong>Altman Z''-Score para Emerging Markets</strong></p>
+<p>$$
+Z'' = 6,56 \cdot A + 3,26 \cdot B + 6,72 \cdot C + 1,05 \cdot D
+$$</p>
+<p>Onde:</p>
+<p>$$
+\begin{aligned}
+A &amp;= \dfrac{\text{Ativo Circulante} - \text{Passivo Circulante}}{\text{Ativo Total}} \
+B &amp;= \dfrac{\text{Patrimônio Líquido}}{\text{Ativo Total}} \
+C &amp;= \dfrac{\text{EBIT}}{\text{Ativo Total}} \
+D &amp;= \dfrac{\text{Patrimônio Líquido}}{\text{Passivo Total}}
+\end{aligned}
+$$</p>
+<p>O passivo total é calculado como $<code>\text{Ativo Total} - \text{PL}</code>$. Coeficientes fixos em <code>ALTMAN_COEF_WC_TA</code>, <code>ALTMAN_COEF_RE_TA</code>, <code>ALTMAN_COEF_EBIT_TA</code>, <code>ALTMAN_COEF_BV_TL</code>. Aplicável só a industriais.</p>
+<p>Referência: Altman (2005), <em>"An Emerging Market Credit Scoring System for Corporate Bonds"</em>.</p>
+<table>
+<thead>
+<tr>
+<th>Zona</th>
+<th>Interpretação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$<code>Z'' &gt; 2,60</code>$</td>
+<td>Segura — baixo risco de distress</td>
+</tr>
+<tr>
+<td>$<code>1,10 &lt; Z'' \leq 2,60</code>$</td>
+<td>Cinza — monitorar</td>
+</tr>
+<tr>
+<td>$<code>Z'' \leq 1,10</code>$</td>
+<td>Distress — alta probabilidade de insolvência em 2 anos</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="piotroski-f-score">Piotroski F-Score<a class="headerlink" href="#piotroski-f-score" title="Permanent link">&para;</a></h2>
+<p>Score de 0 a 9 para qualidade de lucros. Cada critério binário (atende ou não) soma 1 ponto. Aplicável apenas ao setor industrial — os critérios assumem contabilidade de empresa operacional.</p>
+<p>Arquivo: <code>synetra/transformer.py → _calculate_fscore</code>.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Categoria</th>
+<th>Critério</th>
+<th>Expressão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Rentabilidade</td>
+<td>ROA positivo</td>
+<td>$<code>\text{ROA} &gt; 0</code>$</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Rentabilidade</td>
+<td>FCO positivo</td>
+<td>$<code>\text{FCO} &gt; 0</code>$</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Rentabilidade</td>
+<td>ROA crescente</td>
+<td>$<code>\text{ROA}_t &gt; \text{ROA}_{t-1}</code>$</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Qualidade do lucro</td>
+<td>FCO maior que lucro</td>
+<td>$<code>\text{FCO} &gt; \text{Lucro Líquido}</code>$</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Alavancagem</td>
+<td>Alavancagem LP caindo</td>
+<td>$<code>\text{ALAVANCAGEM\_LP}_t &lt; \text{ALAVANCAGEM\_LP}_{t-1}</code>$</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Liquidez</td>
+<td>Liquidez corrente crescendo</td>
+<td>$<code>\text{LIQUIDEZ}_t &gt; \text{LIQUIDEZ}_{t-1}</code>$</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Diluição</td>
+<td>Sem emissão de ações</td>
+<td>$<code>\text{QTDE\_ACOES}_t \leq \text{QTDE\_ACOES}_{t-1}</code>$</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Eficiência</td>
+<td>Margem bruta crescendo</td>
+<td>$<code>\text{MARGEM\_BRUTA}_t &gt; \text{MARGEM\_BRUTA}_{t-1}</code>$</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Eficiência</td>
+<td>Giro do ativo crescendo</td>
+<td>$<code>\text{GIRO\_ATIVO}_t &gt; \text{GIRO\_ATIVO}_{t-1}</code>$</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Regras de guarda:</strong></p>
+<ul>
+<li><code>F_SCORE = null</code> quando <code>ROA_prev</code> é nulo (sem histórico).</li>
+<li><code>F_SCORE = null</code> para <code>FINANCEIRO</code> e <code>SEGURADORA</code>.</li>
+<li>Critério individual com operando nulo soma 0 (fail-closed).</li>
+</ul>
+<p><strong>Interpretação típica:</strong> $<code>F = 8</code>$ ou $<code>9</code>$ indica qualidade alta; $<code>F \leq 2</code>$ indica empresas em deterioração. Piotroski (2000) mostrou que um long-short comprado no F alto e vendido no F baixo gera alpha significativo em amostras de value stocks.</p>
+<hr />
+<h2 id="beneish-m-score">Beneish M-Score<a class="headerlink" href="#beneish-m-score" title="Permanent link">&para;</a></h2>
+<p>Detector de manipulação contábil. Oito termos que comparam ano atual vs. ano anterior para capturar inflação artificial de receita, estiramento de ativos e agressividade em accruals.</p>
+<p>Arquivo: <code>synetra/transformer.py → _calculate_beneish</code> e funções <code>_beneish_*</code>.</p>
+<p>$$
+M = -4,84 + 0,920 \cdot \text{DSRI} + 0,528 \cdot \text{GMI} + 0,404 \cdot \text{AQI} + 0,892 \cdot \text{SGI}
+$$
+$$
+{}+ 0,115 \cdot \text{DEPI} - 0,172 \cdot \text{SGAI} + 4,679 \cdot \text{TATA} - 0,327 \cdot \text{LVGI}
+$$</p>
+<p>Referência: Beneish, M. D. (1999), <em>"The Detection of Earnings Manipulation"</em>, Financial Analysts Journal.</p>
+<h3 id="os-8-termos">Os 8 termos<a class="headerlink" href="#os-8-termos" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Termo</th>
+<th>Nome</th>
+<th>Fórmula</th>
+<th>O que capta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DSRI</td>
+<td>Days Sales in Receivables Index</td>
+<td>$<code>\dfrac{\text{Receber}_t / \text{Receita}_t}{\text{Receber}_{t-1} / \text{Receita}_{t-1}}</code>$</td>
+<td>Inflação de receita via crédito agressivo</td>
+</tr>
+<tr>
+<td>GMI</td>
+<td>Gross Margin Index</td>
+<td>$<code>\dfrac{\text{Margem Bruta}_{t-1}}{\text{Margem Bruta}_t}</code>$</td>
+<td>Deterioração da margem (incentivo a manipular)</td>
+</tr>
+<tr>
+<td>AQI</td>
+<td>Asset Quality Index</td>
+<td>$<code>\dfrac{1 - \frac{AC_t + \text{Imob}_t}{AT_t}}{1 - \frac{AC_{t-1} + \text{Imob}_{t-1}}{AT_{t-1}}}</code>$</td>
+<td>Capitalização indevida de custos em ativos não correntes</td>
+</tr>
+<tr>
+<td>SGI</td>
+<td>Sales Growth Index</td>
+<td>$<code>\dfrac{\text{Receita}_t}{\text{Receita}_{t-1}}</code>$</td>
+<td>Crescimento explosivo (pressão para manter)</td>
+</tr>
+<tr>
+<td>DEPI</td>
+<td>Depreciation Index</td>
+<td>$<code>\dfrac{D_{t-1} / (D_{t-1} + \text{Imob}_{t-1})}{D_t / (D_t + \text{Imob}_t)}</code>$</td>
+<td>Redução de depreciação para inflar lucro</td>
+</tr>
+<tr>
+<td>SGAI</td>
+<td>Sales G&amp;A Expenses Index</td>
+<td>$<code>\dfrac{\text{Desp. Op}_t / \text{Receita}_t}{\text{Desp. Op}_{t-1} / \text{Receita}_{t-1}}</code>$</td>
+<td>Descolamento de despesas x receita</td>
+</tr>
+<tr>
+<td>TATA</td>
+<td>Total Accruals to Total Assets</td>
+<td>$<code>\dfrac{\text{Accruals}_t}{\text{Ativo Total}_t}</code>$</td>
+<td>Lucro contábil descolado do caixa</td>
+</tr>
+<tr>
+<td>LVGI</td>
+<td>Leverage Index</td>
+<td>$<code>\dfrac{\text{Dívida}_t / AT_t}{\text{Dívida}_{t-1} / AT_{t-1}}</code>$</td>
+<td>Elevação de alavancagem pressionando contabilidade</td>
+</tr>
+</tbody>
+</table>
+<h3 id="regras-de-guarda">Regras de guarda<a class="headerlink" href="#regras-de-guarda" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>BENEISH_M = null</code> quando não há histórico (<code>RECEITA_LIQUIDA_prev</code> ou <code>ATIVO_TOTAL_prev</code> nulo).</li>
+<li><code>BENEISH_M = null</code> para setores financeiro e seguradora.</li>
+<li>Termos intermediários usam <code>safe_div</code> — qualquer denominador zero propaga <code>null</code>.</li>
+</ul>
+<h3 id="interpretacao">Interpretação<a class="headerlink" href="#interpretacao" title="Permanent link">&para;</a></h3>
+<p>$<code>M &gt; -2,22</code>$ classifica a empresa como candidata a manipulação contábil. Não é prova — é sinal para investigar as demonstrações com mais cuidado.</p>
+<hr />
+<h2 id="crescimento-yoy-e-cagr">Crescimento — YoY e CAGR<a class="headerlink" href="#crescimento-yoy-e-cagr" title="Permanent link">&para;</a></h2>
+<p>Arquivo: <code>synetra/transformer.py → _yoy_growth_expressions</code>, <code>_cagr_expressions</code>.</p>
+<h3 id="yoy-year-over-year">YoY (Year-over-Year)<a class="headerlink" href="#yoy-year-over-year" title="Permanent link">&para;</a></h3>
+<p>$$
+\text{YoY} = \dfrac{\text{Valor}<em t-1="t-1">t}{\text{Valor}</em>
+$$}} - 1 \qquad \text{(só se base} &gt; 0\text{)</p>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CRESC_RECEITA_YOY</code></td>
+<td><code>RECEITA_LIQUIDA</code> do ano anterior</td>
+</tr>
+<tr>
+<td><code>CRESC_LUCRO_YOY</code></td>
+<td><code>LUCRO_FINAL</code> do ano anterior</td>
+</tr>
+</tbody>
+</table>
+<p>Base $<code>\leq 0</code>$ retorna <code>null</code>. Isso evita "crescimento" enganoso quando a empresa sai do prejuízo.</p>
+<h3 id="cagr-compound-annual-growth-rate">CAGR (Compound Annual Growth Rate)<a class="headerlink" href="#cagr-compound-annual-growth-rate" title="Permanent link">&para;</a></h3>
+<p>$$
+\text{CAGR}(N) = \left(\dfrac{\text{Valor}<em t-N="t-N">t}{\text{Valor}</em> - 1
+$$}}\right)^{1/N</p>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>$<code>N</code>$</th>
+<th>Base</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CAGR_RECEITA_3A</code></td>
+<td>3</td>
+<td><code>RECEITA_LIQUIDA</code> de 3 anos atrás</td>
+</tr>
+<tr>
+<td><code>CAGR_RECEITA_5A</code></td>
+<td>5</td>
+<td><code>RECEITA_LIQUIDA</code> de 5 anos atrás</td>
+</tr>
+<tr>
+<td><code>CAGR_LUCRO_3A</code></td>
+<td>3</td>
+<td><code>LUCRO_FINAL</code> de 3 anos atrás</td>
+</tr>
+<tr>
+<td><code>CAGR_LUCRO_5A</code></td>
+<td>5</td>
+<td><code>LUCRO_FINAL</code> de 5 anos atrás</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Proteções matemáticas:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Caso</th>
+<th>Comportamento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base $<code>\leq 0</code>$</td>
+<td><code>null</code> — raiz de não positivo é inválida</td>
+</tr>
+<tr>
+<td>Valor atual $<code>\leq 0</code>$</td>
+<td><code>null</code> — prejuízo corrente sobre base positiva confunde leitura</td>
+</tr>
+<tr>
+<td>Histórico insuficiente (menos de $<code>N+1</code>$ anos)</td>
+<td><code>null</code> — sem base de comparação</td>
+</tr>
+<tr>
+<td>Contaminação entre tickers</td>
+<td>evitada com <code>shift(N).over("TICKER")</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Matriz de leitura cruzada</strong> (análise prática):</p>
+<table>
+<thead>
+<tr>
+<th>CAGR 5A</th>
+<th>CAGR 3A</th>
+<th>Diagnóstico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alto</td>
+<td>Alto</td>
+<td>Crescimento consistente</td>
+</tr>
+<tr>
+<td>Baixo</td>
+<td>Alto</td>
+<td>Turnaround recente</td>
+</tr>
+<tr>
+<td>Alto</td>
+<td>Baixo</td>
+<td>Desaceleração</td>
+</tr>
+<tr>
+<td>Baixo</td>
+<td>Baixo</td>
+<td>Estagnação ou declínio</td>
+</tr>
+</tbody>
+</table>
+<p>Todos os CAGRs são agnósticos ao setor.</p>
+<hr />
+<h2 id="fatores-quantitativos-quality-momentum-risk">Fatores quantitativos (Quality · Momentum · Risk)<a class="headerlink" href="#fatores-quantitativos-quality-momentum-risk" title="Permanent link">&para;</a></h2>
+<p>Cinco fatores usados em finanças quantitativas (AQR, Dimensional, Fama-French) derivados de contas já presentes.</p>
+<p>Arquivo: <code>synetra/transformer.py → _quant_factor_expressions</code>.</p>
+<h3 id="tabela-de-fatores">Tabela de fatores<a class="headerlink" href="#tabela-de-fatores" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Fator</th>
+<th>Categoria</th>
+<th>Fórmula</th>
+<th>Setores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CASH_CONVERSION</code></td>
+<td>Quality</td>
+<td>$<code>\dfrac{\text{FCO}}{\text{Lucro Líquido}}</code>$ (só se lucro $<code>&gt; 0</code>$)</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>EARNINGS_STABILITY</code></td>
+<td>Quality / Risk</td>
+<td>$<code>\text{std}(\text{ROE})</code>$ em janela de 5 anos</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td><code>VOL_LUCRO</code></td>
+<td>Risk</td>
+<td>$<code>\dfrac{\text{std}(\text{Lucro})_{5a}}{\text{mean}(\text{Lucro})_{5a}}</code>$ (só se média $<code>&gt; 0</code>$)</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td><code>DELTA_ROE</code></td>
+<td>Momentum</td>
+<td>$<code>\text{ROE}_t - \text{ROE}_{t-1}</code>$</td>
+<td>Todos</td>
+</tr>
+<tr>
+<td><code>DELTA_MARGEM</code></td>
+<td>Momentum</td>
+<td>$<code>\text{Margem Líquida}_t - \text{Margem Líquida}_{t-1}</code>$</td>
+<td>Todos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="implementacao">Implementação<a class="headerlink" href="#implementacao" title="Permanent link">&para;</a></h3>
+<p>Os rolling stats são pré-calculados no passo <code>_prepare_shifts</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;ROE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rolling_std</span><span class="p">(</span><span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;TICKER&quot;</span><span class="p">)</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;LUCRO_FINAL&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rolling_std</span><span class="p">(</span><span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;TICKER&quot;</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">pl</span><span class="o">.</span><span class="n">col</span><span class="p">(</span><span class="s2">&quot;LUCRO_FINAL&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">rolling_mean</span><span class="p">(</span><span class="n">window_size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_samples</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">over</span><span class="p">(</span><span class="s2">&quot;TICKER&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<p>O <code>min_samples=5</code> garante <code>null</code> para tickers com histórico curto.</p>
+<h3 id="por-que-cash_conversion-e-anulado-em-bancos">Por que <code>CASH_CONVERSION</code> é anulado em bancos?<a class="headerlink" href="#por-que-cash_conversion-e-anulado-em-bancos" title="Permanent link">&para;</a></h3>
+<p>O FCO de bancos inclui captação de depósitos e empréstimos (a matéria-prima do negócio). Isso inflaciona o ratio sem refletir qualidade operacional. Seguradoras mantêm o indicador porque o FCO delas é mais limpo (prêmios − sinistros).</p>
+<h3 id="referencias-academicas">Referências acadêmicas<a class="headerlink" href="#referencias-academicas" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Sloan (1996) — <em>"Do Stock Prices Fully Reflect Information in Accruals and Cash Flows about Future Earnings?"</em>. Accounting Review.</li>
+<li>Fama &amp; French (2015) — modelo de cinco fatores. Usa estabilidade de rentabilidade como fator Quality.</li>
+<li>Novy-Marx (2013) — momentum fundamentalista. Δ de rentabilidade gera alpha persistente.</li>
+</ul>
+<hr />
+<h2 id="eficiencia-operacional-e-qualidade">Eficiência operacional e qualidade<a class="headerlink" href="#eficiencia-operacional-e-qualidade" title="Permanent link">&para;</a></h2>
+<p>Dez indicadores que complementam a rentabilidade. Todos derivados de colunas já produzidas nos tiers anteriores — sem dados externos.</p>
+<p>Arquivo: <code>synetra/transformer.py → _efficiency_expressions</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Fórmula</th>
+<th>Setores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARGEM_FCO</code></td>
+<td>$<code>\dfrac{\text{FCO}}{\text{Receita Líquida}}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>MARGEM_FCL</code></td>
+<td>$<code>\dfrac{\text{FCL}}{\text{Receita Líquida}}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>CASH_ROA</code></td>
+<td>$<code>\dfrac{\text{FCO}}{\text{Ativo Total}}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>PMR</code></td>
+<td>$<code>\dfrac{\text{Contas a Receber}}{\text{Receita Líquida}} \times 365</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>CAPITAL_DE_GIRO</code></td>
+<td>$<code>\text{Ativo Circulante} - \text{Passivo Circulante}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>ROCE</code></td>
+<td>$<code>\dfrac{\text{EBIT}}{\text{Ativo Total} - \text{Passivo Circulante}}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>NOPAT</code></td>
+<td>$<code>\text{EBIT} \times (1 - 0,34)</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>REINVESTMENT_RATE</code></td>
+<td>$<code>\dfrac{\lvert\text{CAPEX}\rvert}{\lvert\text{Depreciação}\rvert}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+<tr>
+<td><code>SUSTAINABLE_GROWTH</code></td>
+<td>$<code>\text{ROE} \times (1 - \text{Payout}_{\text{clipped[0,1]}})</code>$</td>
+<td><strong>Universal — todos os setores</strong></td>
+</tr>
+<tr>
+<td><code>CASH_RATIO</code></td>
+<td>$<code>\dfrac{\text{Caixa}}{\text{Passivo Circulante}}</code>$</td>
+<td>Industrial + Seguradora</td>
+</tr>
+</tbody>
+</table>
+<h3 id="por-que-9-sao-anulados-para-bancos">Por que 9 são anulados para bancos?<a class="headerlink" href="#por-que-9-sao-anulados-para-bancos" title="Permanent link">&para;</a></h3>
+<p>Os 9 indicadores dependem de FCO, CAPEX, Depreciação, EBIT, Ativo Circulante, Contas a Receber ou Caixa. No contexto bancário, todas essas contas têm significado econômico diferente (depósitos são "passivo operacional", dívida é matéria-prima). Calculá-los para banco produziria números sem interpretação economicamente válida.</p>
+<p>O <code>SUSTAINABLE_GROWTH</code> é a exceção: usa só <code>ROE</code> e <code>PAYOUT</code>, ambos universais e diretamente interpretáveis em qualquer setor.</p>
+<h3 id="interpretacao-rapida">Interpretação rápida<a class="headerlink" href="#interpretacao-rapida" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th>Leitura</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARGEM_FCO &gt; 0.15</code></td>
+<td>Conversão de caixa forte</td>
+</tr>
+<tr>
+<td><code>PMR &lt; 30</code></td>
+<td>Recebe quase à vista (varejo)</td>
+</tr>
+<tr>
+<td><code>PMR &gt; 90</code></td>
+<td>Alerta de financiamento de clientes ou inadimplência</td>
+</tr>
+<tr>
+<td><code>REINVESTMENT_RATE &gt; 1</code></td>
+<td>Expandindo capacidade</td>
+</tr>
+<tr>
+<td><code>REINVESTMENT_RATE &lt; 1</code></td>
+<td>Consumindo o imobilizado sem repor</td>
+</tr>
+<tr>
+<td><code>CASH_RATIO &gt; 0.5</code></td>
+<td>Liquidez imediata confortável</td>
+</tr>
+<tr>
+<td><code>CASH_RATIO &lt; 0.2</code></td>
+<td>Risco de crise de liquidez</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="valuation-historico-e-snapshot-atual">Valuation — histórico e snapshot atual<a class="headerlink" href="#valuation-historico-e-snapshot-atual" title="Permanent link">&para;</a></h2>
+<p>Calculado só quando <code>[market].enabled = true</code> no <code>config.toml</code>. Vive em <code>synetra/market/price_aggregator.py</code>.</p>
+<p>O Synetra separa <strong>valuation histórico anual</strong> e <strong>snapshot atual</strong> em dois arquivos distintos. Mesma lógica matemática, preços diferentes.</p>
+<h3 id="agregacao-diaria-anual">Agregação diária → anual<a class="headerlink" href="#agregacao-diaria-anual" title="Permanent link">&para;</a></h3>
+<p>Função: <code>aggregate_to_yearly</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Coluna anual</th>
+<th>Agregação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>PRECO_FIM_ANO</code></td>
+<td>último fechamento do ano (31/dez ou último pregão)</td>
+</tr>
+<tr>
+<td><code>PRECO_MEDIO_ANO</code></td>
+<td>média aritmética de todos os fechamentos do ano</td>
+</tr>
+<tr>
+<td><code>VOLUME_MEDIO</code></td>
+<td>média do volume diário</td>
+</tr>
+</tbody>
+</table>
+<h3 id="market-cap-consolidado-on-pn">Market Cap consolidado (ON + PN)<a class="headerlink" href="#market-cap-consolidado-on-pn" title="Permanent link">&para;</a></h3>
+<p>Função: <code>_compute_consolidated_market_cap</code>.</p>
+<p>$$
+\text{MC}<em _text_classe="\text{classe">{\text{empresa}} = \sum</em>}} \text{Qtde<em _text_classe="\text{classe">{\text{classe}} \times \text{Preço}</em>
+$$}</p>
+<p>Empresas com duas classes (PETR3 + PETR4, ITUB3 + ITUB4) têm o MC somado. Todos os tickers da mesma empresa (<code>CNPJ_CIA</code>) recebem o MESMO MC, evitando a soma inflada de MCs parciais.</p>
+<p>Classificação por sufixo:</p>
+<table>
+<thead>
+<tr>
+<th>Sufixo</th>
+<th>Classe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>final <code>3</code></td>
+<td>ON (ordinária)</td>
+</tr>
+<tr>
+<td>final <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, <code>8</code></td>
+<td>PN (preferencial)</td>
+</tr>
+<tr>
+<td>final <code>11</code></td>
+<td>UNIT</td>
+</tr>
+</tbody>
+</table>
+<p>Quando o FRE não separa ON/PN, o cálculo cai para fallback simples: $<code>\text{preço} \times \text{QTDE\_ACOES}</code>$.</p>
+<h3 id="multiplos-calculados">Múltiplos calculados<a class="headerlink" href="#multiplos-calculados" title="Permanent link">&para;</a></h3>
+<p>Os múltiplos são calculados duas vezes: uma com <code>PRECO_FIM_ANO</code> (valuation anual, coluna <code>MARKET_CAP</code>, <code>P_L</code>, <code>P_VP</code>), outra com o último fechamento do Yahoo (snapshot, colunas sufixadas <code>_ATUAL</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Múltiplo</th>
+<th>Fórmula</th>
+<th>Regra de guarda</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>P_L</code> / <code>P_L_ATUAL</code></td>
+<td>$<code>\dfrac{\text{Preço}}{\text{LPA}}</code>$</td>
+<td>Preço $<code>&gt; 0</code>$ e LPA $<code>&gt; 0</code>$</td>
+</tr>
+<tr>
+<td><code>P_VP</code> / <code>P_VP_ATUAL</code></td>
+<td>$<code>\dfrac{\text{Preço}}{\text{VPA}}</code>$</td>
+<td>Preço $<code>&gt; 0</code>$ e VPA $<code>&gt; 0</code>$</td>
+</tr>
+<tr>
+<td><code>EARNINGS_YIELD</code></td>
+<td>$<code>\dfrac{\text{LPA}}{\text{Preço}}</code>$</td>
+<td>Inverso do P/L</td>
+</tr>
+<tr>
+<td><code>P_RECEITA</code></td>
+<td>$<code>\dfrac{\text{Market Cap}}{\text{Receita Líquida}}</code>$</td>
+<td>MC e Receita $<code>&gt; 0</code>$</td>
+</tr>
+<tr>
+<td><code>EV_EBITDA</code></td>
+<td>$<code>\dfrac{\text{MC} + \text{Dívida Líquida}}{\text{EBITDA}}</code>$</td>
+<td><strong><code>null</code> para bancos e seguradoras</strong></td>
+</tr>
+<tr>
+<td><code>EV_RECEITA</code></td>
+<td>$<code>\dfrac{\text{MC} + \text{Dívida Líquida}}{\text{Receita Líquida}}</code>$</td>
+<td><strong><code>null</code> para bancos e seguradoras</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="snapshot-atual">Snapshot atual<a class="headerlink" href="#snapshot-atual" title="Permanent link">&para;</a></h3>
+<p>Função: <code>build_snapshot_atual</code>.</p>
+<ul>
+<li>Uma linha por ticker.</li>
+<li><code>PRECO_ATUAL</code> = último fechamento disponível no Yahoo (pregão mais recente).</li>
+<li><code>DATA_COTACAO</code> = data desse fechamento.</li>
+<li>Fallback: quando o Yahoo não tem o ticker, usa <code>PRECO_FIM_ANO</code> do último ano fiscal + data de hoje.</li>
+<li>Output em <code>snapshot_atual.csv</code>.</li>
+</ul>
+<p>Nota de honestidade: "preço atual" não é intraday real-time. É o último close publicado pelo Yahoo Finance. Para análise fundamentalista, é o dado correto e suficiente.</p>
+<hr />
+<h2 id="assepsia-setorial-resumo-consolidado">Assepsia setorial — resumo consolidado<a class="headerlink" href="#assepsia-setorial-resumo-consolidado" title="Permanent link">&para;</a></h2>
+<p>Um mapa único com todas as anulações. Três tabelas: uma por conjunto de indicadores.</p>
+<h3 id="indicadores-industriais-classicos-passo-5">Indicadores industriais clássicos (passo 5)<a class="headerlink" href="#indicadores-industriais-classicos-passo-5" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th style="text-align: center;">Industrial</th>
+<th style="text-align: center;">Financeiro</th>
+<th style="text-align: center;">Seguradora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EBITDA</code>, <code>MARGEM_EBITDA</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>MARGEM_EBIT</code>, <code>MARGEM_BRUTA</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong> (margem bruta)</td>
+</tr>
+<tr>
+<td><code>CAPEX</code>, <code>DEPREC_AMORT</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>ROIC</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+<tr>
+<td><code>LIQUIDEZ_CORRENTE</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+<tr>
+<td><code>DIVIDA_BRUTA</code>, <code>DIVIDA_LIQUIDA</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+<tr>
+<td><code>DL_EBITDA</code>, <code>DIVIDA_PL</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+<tr>
+<td><code>ATIVO_CIRCULANTE</code>, <code>ATIVO_NAO_CIRCULANTE</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>CONTAS_A_RECEBER</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<h3 id="indicadores-de-eficiencia-passo-10">Indicadores de eficiência (passo 10)<a class="headerlink" href="#indicadores-de-eficiencia-passo-10" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Indicador</th>
+<th style="text-align: center;">Industrial</th>
+<th style="text-align: center;">Financeiro</th>
+<th style="text-align: center;">Seguradora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARGEM_FCO</code>, <code>MARGEM_FCL</code>, <code>CASH_ROA</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>PMR</code>, <code>CAPITAL_DE_GIRO</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>ROCE</code>, <code>NOPAT</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>REINVESTMENT_RATE</code>, <code>CASH_RATIO</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>SUSTAINABLE_GROWTH</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>CASH_CONVERSION</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valuation-price_aggregator">Valuation (price_aggregator)<a class="headerlink" href="#valuation-price_aggregator" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Múltiplo</th>
+<th style="text-align: center;">Industrial</th>
+<th style="text-align: center;">Financeiro</th>
+<th style="text-align: center;">Seguradora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARKET_CAP</code>, <code>P_L</code>, <code>P_VP</code>, <code>P_RECEITA</code>, <code>EARNINGS_YIELD</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td><code>EV_EBITDA</code>, <code>EV_RECEITA</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="scores-passos-7-e-8">Scores (passos 7 e 8)<a class="headerlink" href="#scores-passos-7-e-8" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Score</th>
+<th style="text-align: center;">Industrial</th>
+<th style="text-align: center;">Financeiro</th>
+<th style="text-align: center;">Seguradora</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>F_SCORE</code> (Piotroski)</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+<tr>
+<td><code>BENEISH_M</code></td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;"><strong>null</strong></td>
+<td style="text-align: center;"><strong>null</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="auditoria-e-data-quality">Auditoria e Data Quality<a class="headerlink" href="#auditoria-e-data-quality" title="Permanent link">&para;</a></h2>
+<p>Duas camadas independentes de auditoria.</p>
+<h3 id="auditoria-temporal-transformer">Auditoria temporal (transformer)<a class="headerlink" href="#auditoria-temporal-transformer" title="Permanent link">&para;</a></h3>
+<p>Três métricas simples, vetorizadas em Polars — sem loops.</p>
+<p>Arquivo: <code>synetra/transformer.py → audit_data</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Como detecta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gaps_count</code></td>
+<td><code>ANO.diff().over("TICKER") &gt; 1</code></td>
+</tr>
+<tr>
+<td><code>tickers_with_gaps</code></td>
+<td>Tickers únicos com qualquer gap</td>
+</tr>
+<tr>
+<td><code>roe_outliers</code></td>
+<td>Registros com $<code>\lvert\text{ROE}\rvert &gt; 5</code>$ (ou seja, &gt; 500%)</td>
+</tr>
+<tr>
+<td><code>zero_revenue_pct</code></td>
+<td>Percentual de registros com receita nula ou zero</td>
+</tr>
+</tbody>
+</table>
+<h3 id="data-quality-por-ticker">Data Quality por ticker<a class="headerlink" href="#data-quality-por-ticker" title="Permanent link">&para;</a></h3>
+<p>Gera <code>data_quality_report.csv</code> com uma linha por ticker e flags explicativas.</p>
+<p>Arquivo: <code>synetra/data_quality/checks.py</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Severidade</th>
+<th>Dispara quando</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NO_YAHOO_HISTORY</code></td>
+<td>HIGH</td>
+<td>Ticker existe no CVM mas nunca teve preço Yahoo</td>
+</tr>
+<tr>
+<td><code>LIKELY_DELISTED</code></td>
+<td>HIGH</td>
+<td>Último dado CVM há 2+ anos</td>
+</tr>
+<tr>
+<td><code>YAHOO_STALE</code></td>
+<td>MEDIUM</td>
+<td>Gap entre último ano Yahoo e último CVM &gt; 1 ano</td>
+</tr>
+<tr>
+<td><code>TICKER_MAY_BE_WRONG</code></td>
+<td>MEDIUM</td>
+<td>Ticker PN ou UNIT sem preço Yahoo (classe ON dominante não mapeada?)</td>
+</tr>
+<tr>
+<td><code>TEMPORAL_GAP</code></td>
+<td>LOW</td>
+<td>Anos faltando no meio da série</td>
+</tr>
+<tr>
+<td><code>RECENT_LISTING</code></td>
+<td>LOW</td>
+<td>Menos de 3 anos de dados CVM</td>
+</tr>
+</tbody>
+</table>
+<p>A severidade do ticker é o máximo das severidades das flags ativas. Tickers sem flag → <code>OK</code>.</p>
+<hr />
+<h2 id="arredondamentos-e-tipos-de-saida">Arredondamentos e tipos de saída<a class="headerlink" href="#arredondamentos-e-tipos-de-saida" title="Permanent link">&para;</a></h2>
+<p>Regras aplicadas no passo 11 (<code>_round_and_finalize</code>) e no módulo de valuation.</p>
+<h3 id="quatro-casas-decimais-ratios-e-percentuais">Quatro casas decimais (ratios e percentuais)<a class="headerlink" href="#quatro-casas-decimais-ratios-e-percentuais" title="Permanent link">&para;</a></h3>
+<p><code>ROE</code>, <code>ROA</code>, <code>ROIC</code>, <code>GP_A</code>, todas as margens, <code>LIQUIDEZ_CORRENTE</code>, <code>DL_EBITDA</code>, <code>DIVIDA_PL</code>, <code>PAYOUT</code>, <code>LPA</code>, <code>VPA</code>, <code>ALTMAN_Z</code>, <code>BENEISH_M</code>, <code>ACCRUAL_RATIO</code>, todos os YoY e CAGR, <code>CASH_CONVERSION</code>, <code>EARNINGS_STABILITY</code>, <code>VOL_LUCRO</code>, <code>DELTA_ROE</code>, <code>DELTA_MARGEM</code>, todas as margens de fluxo de caixa, <code>CASH_ROA</code>, <code>ROCE</code>, <code>REINVESTMENT_RATE</code>, <code>SUSTAINABLE_GROWTH</code>, <code>CASH_RATIO</code>.</p>
+<h3 id="duas-casas-decimais-valores-monetarios">Duas casas decimais (valores monetários)<a class="headerlink" href="#duas-casas-decimais-valores-monetarios" title="Permanent link">&para;</a></h3>
+<p><code>RECEITA_LIQUIDA</code>, <code>LUCRO_BRUTO</code>, <code>LUCRO_LIQUIDO</code>, <code>EBITDA</code>, <code>FCO</code>, <code>CAPEX</code>, <code>FCL</code>, <code>DIVIDA_BRUTA</code>, <code>DIVIDA_LIQUIDA</code>, <code>DEPREC_AMORT</code>, <code>CAPITAL_DE_GIRO</code>, <code>NOPAT</code>, <code>PMR</code>.</p>
+<h3 id="casos-especiais-valuation">Casos especiais (valuation)<a class="headerlink" href="#casos-especiais-valuation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Casas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MARKET_CAP</code>, <code>MARKET_CAP_ATUAL</code></td>
+<td>0 (inteiro)</td>
+</tr>
+<tr>
+<td><code>EARNINGS_YIELD</code></td>
+<td>4</td>
+</tr>
+<tr>
+<td>Preços, P/L, P/VP, P/Receita, EV múltiplos</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="referencia-cruzada-de-arquivos">Referência cruzada de arquivos<a class="headerlink" href="#referencia-cruzada-de-arquivos" title="Permanent link">&para;</a></h2>
+<p>Navegue do conceito ao código.</p>
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Arquivo</th>
+<th>Função/símbolo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Validação de config</td>
+<td><code>synetra/config.py</code></td>
+<td><code>SynetraConfig</code>, <code>load_config</code></td>
+</tr>
+<tr>
+<td>Download async</td>
+<td><code>synetra/downloader.py</code></td>
+<td><code>CVMDownloader</code></td>
+</tr>
+<tr>
+<td>Leitura de CSV CVM</td>
+<td><code>synetra/loader.py</code></td>
+<td><code>read_cvm_csv</code>, <code>process_year_from_zip</code>, <code>process_fre_from_zip</code></td>
+</tr>
+<tr>
+<td>Classificação setorial</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>classify_sectors</code></td>
+</tr>
+<tr>
+<td>Detecção de contas especiais</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>detect_special_accounts</code></td>
+</tr>
+<tr>
+<td>Mapa de contas</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>map_accounts</code></td>
+</tr>
+<tr>
+<td>Pivot e consolidações</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_pivot_and_consolidate</code></td>
+</tr>
+<tr>
+<td>Resolução do Lucro</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_resolve_net_income</code></td>
+</tr>
+<tr>
+<td>Tiers 1 a 5</td>
+<td><code>synetra/domain/indicators.py</code></td>
+<td><code>get_tier{1..5}_expressions</code>, <code>calculate_all_indicators</code></td>
+</tr>
+<tr>
+<td>Altman Z''</td>
+<td><code>synetra/domain/indicators.py</code></td>
+<td><code>_altman_z_score</code></td>
+</tr>
+<tr>
+<td>ROIC</td>
+<td><code>synetra/domain/indicators.py</code></td>
+<td><code>_roic</code></td>
+</tr>
+<tr>
+<td>F-Score</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_calculate_fscore</code></td>
+</tr>
+<tr>
+<td>Beneish M-Score</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_calculate_beneish</code>, <code>_beneish_*</code></td>
+</tr>
+<tr>
+<td>YoY e CAGR</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_yoy_growth_expressions</code>, <code>_cagr_expressions</code></td>
+</tr>
+<tr>
+<td>Fatores quantitativos</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_quant_factor_expressions</code></td>
+</tr>
+<tr>
+<td>Eficiência</td>
+<td><code>synetra/transformer.py</code></td>
+<td><code>_efficiency_expressions</code></td>
+</tr>
+<tr>
+<td>Valuation histórico</td>
+<td><code>synetra/market/price_aggregator.py</code></td>
+<td><code>attach_historical_valuation</code></td>
+</tr>
+<tr>
+<td>Snapshot atual</td>
+<td><code>synetra/market/price_aggregator.py</code></td>
+<td><code>build_snapshot_atual</code></td>
+</tr>
+<tr>
+<td>Data Quality</td>
+<td><code>synetra/data_quality/checks.py</code></td>
+<td><code>run_all_checks</code></td>
+</tr>
+<tr>
+<td>Relatório de qualidade</td>
+<td><code>synetra/data_quality/report.py</code></td>
+<td><code>run_data_quality_audit</code></td>
+</tr>
+<tr>
+<td>Métricas de execução</td>
+<td><code>synetra/observability.py</code></td>
+<td><code>PipelineMetrics</code>, <code>timed_step</code></td>
+</tr>
+<tr>
+<td>Constantes de tributação</td>
+<td><code>synetra/domain/indicators.py</code></td>
+<td><code>BRAZIL_TAX_RATE</code>, <code>BRAZIL_AFTER_TAX</code></td>
+</tr>
+<tr>
+<td>Coeficientes Altman</td>
+<td><code>synetra/domain/indicators.py</code></td>
+<td><code>ALTMAN_COEF_*</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Voltar ao topo
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/synetra/synetra" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
