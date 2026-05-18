@@ -51,7 +51,7 @@ The invariants that keep the pipeline predictable.
 
 ### Notation
 
-- LaTeX expressions ($\cdot$) for math.
+- LaTeX expressions ($`\cdot`$) for math.
 - ```python``` blocks when showing the Polars expression is essential.
 - `null` means `None` (Polars) — explicitly absent, different from zero.
 - "Category" refers to the `Categoria` enum (`INDUSTRIAL`, `FINANCEIRO`, `SEGURADORA`).
@@ -276,7 +276,7 @@ After the pivot, `_ensure_all_account_columns` guarantees every expected column 
 ### Insurer cash consolidation
 
 $$
-\text{CAIXA\_EQUIVALENTES}_{\text{insurer}} = \text{Cash} + \text{ST investments} + \text{LT investments}
+\text{CAIXA EQUIVALENTES}_{\text{insurer}} = \text{Cash} + \text{ST investments} + \text{LT investments}
 $$
 
 For other sectors, `CAIXA_EQUIVALENTES` is left alone.
@@ -335,21 +335,21 @@ Function: `get_tier1_expressions()`.
 
 | Indicator | Formula | Sectors | Accounts used |
 |---|---|---|---|
-| `ROE` | $\dfrac{\text{Net Income}}{\text{Equity}}$ | All | `LUCRO_FINAL`, `PATRIMONIO_LIQUIDO` |
-| `ROA` | $\dfrac{\text{Net Income}}{\text{Total Assets}}$ | All | `LUCRO_FINAL`, `ATIVO_TOTAL` |
-| `LPA` (EPS) | $\dfrac{\text{Net Income}}{\text{Shares Out.}}$ | All | `LUCRO_FINAL`, `QTDE_ACOES` (FRE) |
-| `VPA` (BVPS) | $\dfrac{\text{Equity}}{\text{Shares Out.}}$ | All | `PATRIMONIO_LIQUIDO`, `QTDE_ACOES` |
-| `GIRO_ATIVO` (Turnover) | $\dfrac{\text{Net Revenue}}{\text{Total Assets}}$ | All | `RECEITA_LIQUIDA`, `ATIVO_TOTAL` |
-| `ALAVANCAGEM_LP` | $\dfrac{\text{LT Debt}}{\text{Total Assets}}$ | All | `DIVIDA_LP`, `ATIVO_TOTAL` (auxiliary; dropped at finalize) |
-| `ACCRUALS` | $\text{Net Income} - \text{FCO}$ | All | `LUCRO_FINAL`, `FCO` |
-| `ACCRUAL_RATIO` | $\dfrac{\text{Net Income} - \text{FCO}}{\text{Total Assets}}$ | Industrial | `LUCRO_FINAL`, `FCO`, `ATIVO_TOTAL` |
-| `GP_A` | $\dfrac{\text{Gross Profit}}{\text{Total Assets}}$ | Industrial | `RESULTADO_BRUTO`, `ATIVO_TOTAL` |
-| `MARGEM_EBIT` | $\dfrac{\text{EBIT}}{\text{Net Revenue}}$ | All (nulled for banks) | `EBIT`, `RECEITA_LIQUIDA` |
-| `MARGEM_LIQUIDA` | $\dfrac{\text{Net Income}}{\text{Net Revenue}}$ | All | `LUCRO_FINAL`, `RECEITA_LIQUIDA` |
-| `MARGEM_BRUTA` | $\dfrac{\text{Gross Profit}}{\text{Net Revenue}}$ | All (nulled for banks/insurers) | `RESULTADO_BRUTO`, `RECEITA_LIQUIDA` |
+| `ROE` | $`\dfrac{\text{Net Income}}{\text{Equity}}`$ | All | `LUCRO_FINAL`, `PATRIMONIO_LIQUIDO` |
+| `ROA` | $`\dfrac{\text{Net Income}}{\text{Total Assets}}`$ | All | `LUCRO_FINAL`, `ATIVO_TOTAL` |
+| `LPA` (EPS) | $`\dfrac{\text{Net Income}}{\text{Shares Out.}}`$ | All | `LUCRO_FINAL`, `QTDE_ACOES` (FRE) |
+| `VPA` (BVPS) | $`\dfrac{\text{Equity}}{\text{Shares Out.}}`$ | All | `PATRIMONIO_LIQUIDO`, `QTDE_ACOES` |
+| `GIRO_ATIVO` (Turnover) | $`\dfrac{\text{Net Revenue}}{\text{Total Assets}}`$ | All | `RECEITA_LIQUIDA`, `ATIVO_TOTAL` |
+| `ALAVANCAGEM_LP` | $`\dfrac{\text{LT Debt}}{\text{Total Assets}}`$ | All | `DIVIDA_LP`, `ATIVO_TOTAL` (auxiliary; dropped at finalize) |
+| `ACCRUALS` | $`\text{Net Income} - \text{FCO}`$ | All | `LUCRO_FINAL`, `FCO` |
+| `ACCRUAL_RATIO` | $`\dfrac{\text{Net Income} - \text{FCO}}{\text{Total Assets}}`$ | Industrial | `LUCRO_FINAL`, `FCO`, `ATIVO_TOTAL` |
+| `GP_A` | $`\dfrac{\text{Gross Profit}}{\text{Total Assets}}`$ | Industrial | `RESULTADO_BRUTO`, `ATIVO_TOTAL` |
+| `MARGEM_EBIT` | $`\dfrac{\text{EBIT}}{\text{Net Revenue}}`$ | All (nulled for banks) | `EBIT`, `RECEITA_LIQUIDA` |
+| `MARGEM_LIQUIDA` | $`\dfrac{\text{Net Income}}{\text{Net Revenue}}`$ | All | `LUCRO_FINAL`, `RECEITA_LIQUIDA` |
+| `MARGEM_BRUTA` | $`\dfrac{\text{Gross Profit}}{\text{Net Revenue}}`$ | All (nulled for banks/insurers) | `RESULTADO_BRUTO`, `RECEITA_LIQUIDA` |
 | `CAPEX` | `CAPEX_VAL` (via regex) | Industrial + Insurance | detected by regex in `detect_special_accounts` |
 | `DEPREC_AMORT` | `DEPREC_AMORT` (via regex) | Industrial + Insurance | same |
-| `PROVENTOS` (Dividends paid) | $|{\text{Dividends Paid}}|$ | All | `DIVIDENDOS_PAGOS` (regex) |
+| `PROVENTOS` (Dividends paid) | $`\lvert\text{Dividends Paid}\rvert`$ | All | `DIVIDENDOS_PAGOS` (regex) |
 
 ### Tier 2 — Cash flow
 
@@ -379,7 +379,7 @@ Zero or negative denominator → `null` (via `safe_div`).
 **EBITDA**
 
 $$
-\text{EBITDA} = \text{EBIT} + |\text{D\&A}|
+\text{EBITDA} = \text{EBIT} + |\text{Depreciation and Amortization}|
 $$
 
 The `fill_null(0)` avoids losing EBITDA when the company doesn't disclose D&A separately.
@@ -390,9 +390,9 @@ Function: `get_tier3_expressions()`.
 
 | Indicator | Formula | Sectors | Note |
 |---|---|---|---|
-| `MARGEM_EBITDA` | $\dfrac{\text{EBITDA}}{\text{Net Revenue}}$ | All (nulled for banks) | — |
-| `DIVIDA_TOTAL` | $\text{ST Debt} + \text{LT Debt}$ (industrial) $\mid$ $0$ (insurer) $\mid$ `null` (bank) | varies | Banks treat "debt" as raw material, not operational financing |
-| `LIQUIDEZ_CORRENTE` (Current ratio) | $\dfrac{\text{Current Assets}}{\text{Current Liabilities}}$ | Industrial | `null` for banks and insurers |
+| `MARGEM_EBITDA` | $`\dfrac{\text{EBITDA}}{\text{Net Revenue}}`$ | All (nulled for banks) | — |
+| `DIVIDA_TOTAL` | $`\text{ST Debt} + \text{LT Debt}`$ (industrial) $`\mid`$ $`0`$ (insurer) $`\mid`$ `null` (bank) | varies | Banks treat "debt" as raw material, not operational financing |
+| `LIQUIDEZ_CORRENTE` (Current ratio) | $`\dfrac{\text{Current Assets}}{\text{Current Liabilities}}`$ | Industrial | `null` for banks and insurers |
 
 Renamed at `_merge_tickers`: `DIVIDA_TOTAL` becomes `DIVIDA_BRUTA` (gross debt) in the public output.
 
@@ -402,11 +402,11 @@ Function: `get_tier4_expressions()`.
 
 | Indicator | Formula | Sectors |
 |---|---|---|
-| `DIVIDA_LIQUIDA` (Net Debt) | $\text{Total Debt} - \text{Cash and Equivalents}$ | Industrial |
-| | $0 - \text{Cash}$ | Insurer |
+| `DIVIDA_LIQUIDA` (Net Debt) | $`\text{Total Debt} - \text{Cash and Equivalents}`$ | Industrial |
+| | $`0 - \text{Cash}`$ | Insurer |
 | | `null` | Bank |
-| `DIVIDA_PL` (Debt/Equity) | $\dfrac{\text{Total Debt}}{\text{Equity}}$ | Industrial |
-| | $0$ | Insurer |
+| `DIVIDA_PL` (Debt/Equity) | $`\dfrac{\text{Total Debt}}{\text{Equity}}`$ | Industrial |
+| | $`0`$ | Insurer |
 | | `null` | Bank |
 
 ### Tier 5 — Final ratios
@@ -427,7 +427,7 @@ $$
 \text{ROIC} = \dfrac{\text{EBIT} \times (1 - t)}{\text{Equity} + \text{Gross Debt}}
 $$
 
-Where $t = 0.34$ is the combined Brazilian corporate tax rate (IR + CSLL, per Laws 9.249/95 and 9.316/96), defined as `BRAZIL_TAX_RATE`. Industrial only.
+Where $`t = 0.34`$ is the combined Brazilian corporate tax rate (IR + CSLL, per Laws 9.249/95 and 9.316/96), defined as `BRAZIL_TAX_RATE`. Industrial only.
 
 **Altman Z''-Score for Emerging Markets**
 
@@ -439,22 +439,22 @@ Where:
 
 $$
 \begin{aligned}
-A &= \dfrac{\text{Current Assets} - \text{Current Liab.}}{\text{Total Assets}} \\[4pt]
-B &= \dfrac{\text{Equity}}{\text{Total Assets}} \\[4pt]
-C &= \dfrac{\text{EBIT}}{\text{Total Assets}} \\[4pt]
+A &= \dfrac{\text{Current Assets} - \text{Current Liab.}}{\text{Total Assets}} \\
+B &= \dfrac{\text{Equity}}{\text{Total Assets}} \\
+C &= \dfrac{\text{EBIT}}{\text{Total Assets}} \\
 D &= \dfrac{\text{Equity}}{\text{Total Liabilities}}
 \end{aligned}
 $$
 
-Total liabilities is computed as $\text{Total Assets} - \text{Equity}$. Coefficients hardcoded as `ALTMAN_COEF_WC_TA`, `ALTMAN_COEF_RE_TA`, `ALTMAN_COEF_EBIT_TA`, `ALTMAN_COEF_BV_TL`. Industrial only.
+Total liabilities is computed as $`\text{Total Assets} - \text{Equity}`$. Coefficients hardcoded as `ALTMAN_COEF_WC_TA`, `ALTMAN_COEF_RE_TA`, `ALTMAN_COEF_EBIT_TA`, `ALTMAN_COEF_BV_TL`. Industrial only.
 
 Reference: Altman (2005), *"An Emerging Market Credit Scoring System for Corporate Bonds"*.
 
 | Zone | Interpretation |
 |---|---|
-| $Z'' > 2.60$ | Safe — low distress risk |
-| $1.10 < Z'' \leq 2.60$ | Grey — monitor |
-| $Z'' \leq 1.10$ | Distress — high bankruptcy probability in 2 years |
+| $`Z'' > 2.60`$ | Safe — low distress risk |
+| $`1.10 < Z'' \leq 2.60`$ | Grey — monitor |
+| $`Z'' \leq 1.10`$ | Distress — high bankruptcy probability in 2 years |
 
 ---
 
@@ -466,15 +466,15 @@ File: `synetra/transformer.py → _calculate_fscore`.
 
 | # | Category | Criterion | Expression |
 |---|---|---|---|
-| 1 | Profitability | Positive ROA | $\text{ROA} > 0$ |
-| 2 | Profitability | Positive CFO | $\text{FCO} > 0$ |
-| 3 | Profitability | Growing ROA | $\text{ROA}_t > \text{ROA}_{t-1}$ |
-| 4 | Earnings quality | CFO greater than net income | $\text{FCO} > \text{Net Income}$ |
-| 5 | Leverage | LT leverage dropping | $\text{ALAVANCAGEM\_LP}_t < \text{ALAVANCAGEM\_LP}_{t-1}$ |
-| 6 | Liquidity | Current ratio growing | $\text{CURR}_t > \text{CURR}_{t-1}$ |
-| 7 | Dilution | No share issuance | $\text{SHARES}_t \leq \text{SHARES}_{t-1}$ |
-| 8 | Efficiency | Gross margin growing | $\text{GM}_t > \text{GM}_{t-1}$ |
-| 9 | Efficiency | Asset turnover growing | $\text{TURN}_t > \text{TURN}_{t-1}$ |
+| 1 | Profitability | Positive ROA | $`\text{ROA} > 0`$ |
+| 2 | Profitability | Positive CFO | $`\text{FCO} > 0`$ |
+| 3 | Profitability | Growing ROA | $`\text{ROA}_t > \text{ROA}_{t-1}`$ |
+| 4 | Earnings quality | CFO greater than net income | $`\text{FCO} > \text{Net Income}`$ |
+| 5 | Leverage | LT leverage dropping | $`\text{ALAVANCAGEM\_LP}_t < \text{ALAVANCAGEM\_LP}_{t-1}`$ |
+| 6 | Liquidity | Current ratio growing | $`\text{CURR}_t > \text{CURR}_{t-1}`$ |
+| 7 | Dilution | No share issuance | $`\text{SHARES}_t \leq \text{SHARES}_{t-1}`$ |
+| 8 | Efficiency | Gross margin growing | $`\text{GM}_t > \text{GM}_{t-1}`$ |
+| 9 | Efficiency | Asset turnover growing | $`\text{TURN}_t > \text{TURN}_{t-1}`$ |
 
 **Guards:**
 
@@ -482,7 +482,7 @@ File: `synetra/transformer.py → _calculate_fscore`.
 - `F_SCORE = null` for `FINANCEIRO` and `SEGURADORA`.
 - A criterion with null operand contributes 0 (fail-closed).
 
-**Typical reading:** $F = 8$ or $9$ means high quality; $F \leq 2$ means deteriorating. Piotroski (2000) showed that a long-short built on high F minus low F generates meaningful alpha on value stock samples.
+**Typical reading:** $`F = 8`$ or $`9`$ means high quality; $`F \leq 2`$ means deteriorating. Piotroski (2000) showed that a long-short built on high F minus low F generates meaningful alpha on value stock samples.
 
 ---
 
@@ -505,14 +505,14 @@ Reference: Beneish, M. D. (1999), *"The Detection of Earnings Manipulation"*, Fi
 
 | Term | Name | Formula | What it catches |
 |---|---|---|---|
-| DSRI | Days Sales in Receivables Index | $\dfrac{\text{AR}_t / \text{Rev}_t}{\text{AR}_{t-1} / \text{Rev}_{t-1}}$ | Revenue inflation via aggressive credit |
-| GMI | Gross Margin Index | $\dfrac{\text{GM}_{t-1}}{\text{GM}_t}$ | Margin deterioration (incentive to manipulate) |
-| AQI | Asset Quality Index | $\dfrac{1 - \frac{CA_t + \text{PPE}_t}{TA_t}}{1 - \frac{CA_{t-1} + \text{PPE}_{t-1}}{TA_{t-1}}}$ | Improper capitalization into non-current assets |
-| SGI | Sales Growth Index | $\dfrac{\text{Rev}_t}{\text{Rev}_{t-1}}$ | Explosive growth (pressure to keep it going) |
-| DEPI | Depreciation Index | $\dfrac{D_{t-1} / (D_{t-1} + \text{PPE}_{t-1})}{D_t / (D_t + \text{PPE}_t)}$ | Slowing depreciation to inflate earnings |
-| SGAI | SG&A Expenses Index | $\dfrac{\text{Opex}_t / \text{Rev}_t}{\text{Opex}_{t-1} / \text{Rev}_{t-1}}$ | Disconnect between expenses and revenue |
-| TATA | Total Accruals to Total Assets | $\dfrac{\text{Accruals}_t}{\text{Total Assets}_t}$ | Accounting income detached from cash |
-| LVGI | Leverage Index | $\dfrac{\text{Debt}_t / TA_t}{\text{Debt}_{t-1} / TA_{t-1}}$ | Rising leverage pressuring accounting |
+| DSRI | Days Sales in Receivables Index | $`\dfrac{\text{AR}_t / \text{Rev}_t}{\text{AR}_{t-1} / \text{Rev}_{t-1}}`$ | Revenue inflation via aggressive credit |
+| GMI | Gross Margin Index | $`\dfrac{\text{GM}_{t-1}}{\text{GM}_t}`$ | Margin deterioration (incentive to manipulate) |
+| AQI | Asset Quality Index | $`\dfrac{1 - \frac{CA_t + \text{PPE}_t}{TA_t}}{1 - \frac{CA_{t-1} + \text{PPE}_{t-1}}{TA_{t-1}}}`$ | Improper capitalization into non-current assets |
+| SGI | Sales Growth Index | $`\dfrac{\text{Rev}_t}{\text{Rev}_{t-1}}`$ | Explosive growth (pressure to keep it going) |
+| DEPI | Depreciation Index | $`\dfrac{D_{t-1} / (D_{t-1} + \text{PPE}_{t-1})}{D_t / (D_t + \text{PPE}_t)}`$ | Slowing depreciation to inflate earnings |
+| SGAI | SG&A Expenses Index | $`\dfrac{\text{Opex}_t / \text{Rev}_t}{\text{Opex}_{t-1} / \text{Rev}_{t-1}}`$ | Disconnect between expenses and revenue |
+| TATA | Total Accruals to Total Assets | $`\dfrac{\text{Accruals}_t}{\text{Total Assets}_t}`$ | Accounting income detached from cash |
+| LVGI | Leverage Index | $`\dfrac{\text{Debt}_t / TA_t}{\text{Debt}_{t-1} / TA_{t-1}}`$ | Rising leverage pressuring accounting |
 
 ### Guards
 
@@ -522,7 +522,7 @@ Reference: Beneish, M. D. (1999), *"The Detection of Earnings Manipulation"*, Fi
 
 ### Interpretation
 
-$M > -2.22$ flags the company as a manipulation candidate. Not proof. A signal to dig deeper into the financials.
+$`M > -2.22`$ flags the company as a manipulation candidate. Not proof. A signal to dig deeper into the financials.
 
 ---
 
@@ -541,7 +541,7 @@ $$
 | `CRESC_RECEITA_YOY` | Prior year `RECEITA_LIQUIDA` |
 | `CRESC_LUCRO_YOY` | Prior year `LUCRO_FINAL` |
 
-Base $\leq 0$ returns `null`. This avoids misleading "growth" when a company is coming out of losses.
+Base $`\leq 0`$ returns `null`. This avoids misleading "growth" when a company is coming out of losses.
 
 ### CAGR (Compound Annual Growth Rate)
 
@@ -549,7 +549,7 @@ $$
 \text{CAGR}(N) = \left(\dfrac{\text{Value}_t}{\text{Value}_{t-N}}\right)^{1/N} - 1
 $$
 
-| Indicator | $N$ | Base |
+| Indicator | $`N`$ | Base |
 |---|---|---|
 | `CAGR_RECEITA_3A` | 3 | `RECEITA_LIQUIDA` 3 years ago |
 | `CAGR_RECEITA_5A` | 5 | `RECEITA_LIQUIDA` 5 years ago |
@@ -560,9 +560,9 @@ $$
 
 | Case | Behavior |
 |---|---|
-| Base $\leq 0$ | `null` — root of a non-positive is invalid |
-| Current value $\leq 0$ | `null` — current losses on a positive base distort the reading |
-| Insufficient history (less than $N+1$ years) | `null` — no comparison base |
+| Base $`\leq 0`$ | `null` — root of a non-positive is invalid |
+| Current value $`\leq 0`$ | `null` — current losses on a positive base distort the reading |
+| Insufficient history (less than $`N+1`$ years) | `null` — no comparison base |
 | Cross-ticker contamination | prevented by `shift(N).over("TICKER")` |
 
 **Cross-read matrix:**
@@ -588,11 +588,11 @@ File: `synetra/transformer.py → _quant_factor_expressions`.
 
 | Factor | Category | Formula | Sectors |
 |---|---|---|---|
-| `CASH_CONVERSION` | Quality | $\dfrac{\text{FCO}}{\text{Net Income}}$ (only if profit $> 0$) | Industrial + Insurance |
-| `EARNINGS_STABILITY` | Quality / Risk | $\text{std}(\text{ROE})$ over 5 years | All |
-| `VOL_LUCRO` | Risk | $\dfrac{\text{std}(\text{Income})_{5y}}{\text{mean}(\text{Income})_{5y}}$ (only if mean $> 0$) | All |
-| `DELTA_ROE` | Momentum | $\text{ROE}_t - \text{ROE}_{t-1}$ | All |
-| `DELTA_MARGEM` | Momentum | $\text{Net Margin}_t - \text{Net Margin}_{t-1}$ | All |
+| `CASH_CONVERSION` | Quality | $`\dfrac{\text{FCO}}{\text{Net Income}}`$ (only if profit $`> 0`$) | Industrial + Insurance |
+| `EARNINGS_STABILITY` | Quality / Risk | $`\text{std}(\text{ROE})`$ over 5 years | All |
+| `VOL_LUCRO` | Risk | $`\dfrac{\text{std}(\text{Income})_{5y}}{\text{mean}(\text{Income})_{5y}}`$ (only if mean $`> 0`$) | All |
+| `DELTA_ROE` | Momentum | $`\text{ROE}_t - \text{ROE}_{t-1}`$ | All |
+| `DELTA_MARGEM` | Momentum | $`\text{Net Margin}_t - \text{Net Margin}_{t-1}`$ | All |
 
 ### Implementation
 
@@ -626,16 +626,16 @@ File: `synetra/transformer.py → _efficiency_expressions`.
 
 | Indicator | Formula | Sectors |
 |---|---|---|
-| `MARGEM_FCO` | $\dfrac{\text{FCO}}{\text{Net Revenue}}$ | Industrial + Insurance |
-| `MARGEM_FCL` | $\dfrac{\text{FCF}}{\text{Net Revenue}}$ | Industrial + Insurance |
-| `CASH_ROA` | $\dfrac{\text{FCO}}{\text{Total Assets}}$ | Industrial + Insurance |
-| `PMR` (DSO) | $\dfrac{\text{Receivables}}{\text{Net Revenue}} \times 365$ | Industrial + Insurance |
-| `CAPITAL_DE_GIRO` (Working Capital) | $\text{Current Assets} - \text{Current Liab.}$ | Industrial + Insurance |
-| `ROCE` | $\dfrac{\text{EBIT}}{\text{Total Assets} - \text{Current Liab.}}$ | Industrial + Insurance |
-| `NOPAT` | $\text{EBIT} \times (1 - 0.34)$ | Industrial + Insurance |
-| `REINVESTMENT_RATE` | $\dfrac{|\text{CAPEX}|}{|\text{D\&A}|}$ | Industrial + Insurance |
-| `SUSTAINABLE_GROWTH` | $\text{ROE} \times (1 - \text{Payout}_{\text{clipped}[0,1]})$ | **Universal — all sectors** |
-| `CASH_RATIO` | $\dfrac{\text{Cash}}{\text{Current Liab.}}$ | Industrial + Insurance |
+| `MARGEM_FCO` | $`\dfrac{\text{FCO}}{\text{Net Revenue}}`$ | Industrial + Insurance |
+| `MARGEM_FCL` | $`\dfrac{\text{FCF}}{\text{Net Revenue}}`$ | Industrial + Insurance |
+| `CASH_ROA` | $`\dfrac{\text{FCO}}{\text{Total Assets}}`$ | Industrial + Insurance |
+| `PMR` (DSO) | $`\dfrac{\text{Receivables}}{\text{Net Revenue}} \times 365`$ | Industrial + Insurance |
+| `CAPITAL_DE_GIRO` (Working Capital) | $`\text{Current Assets} - \text{Current Liab.}`$ | Industrial + Insurance |
+| `ROCE` | $`\dfrac{\text{EBIT}}{\text{Total Assets} - \text{Current Liab.}}`$ | Industrial + Insurance |
+| `NOPAT` | $`\text{EBIT} \times (1 - 0.34)`$ | Industrial + Insurance |
+| `REINVESTMENT_RATE` | $`\dfrac{\lvert\text{CAPEX}\rvert}{\lvert\text{Depreciation}\rvert}`$ | Industrial + Insurance |
+| `SUSTAINABLE_GROWTH` | $`\text{ROE} \times (1 - \text{Payout}_{\text{clipped[0,1]}})`$ | **Universal — all sectors** |
+| `CASH_RATIO` | $`\dfrac{\text{Cash}}{\text{Current Liab.}}`$ | Industrial + Insurance |
 
 ### Why 9 are nulled for banks
 
@@ -691,7 +691,7 @@ Ticker suffix classification:
 | ends with `4`, `5`, `6`, `7`, `8` | PN (preferred) |
 | ends with `11` | UNIT |
 
-When the FRE filing doesn't separate ON/PN, the computation falls back to the simple case: $\text{price} \times \text{QTDE\_ACOES}$.
+When the FRE filing doesn't separate ON/PN, the computation falls back to the simple case: $`\text{price} \times \text{QTDE\_ACOES}`$.
 
 ### Multiples
 
@@ -699,12 +699,12 @@ Multiples are computed twice: once with `PRECO_FIM_ANO` (annual valuation, `MARK
 
 | Multiple | Formula | Guard rule |
 |---|---|---|
-| `P_L` / `P_L_ATUAL` | $\dfrac{\text{Price}}{\text{EPS}}$ | Price $> 0$ and EPS $> 0$ |
-| `P_VP` / `P_VP_ATUAL` | $\dfrac{\text{Price}}{\text{BVPS}}$ | Price $> 0$ and BVPS $> 0$ |
-| `EARNINGS_YIELD` | $\dfrac{\text{EPS}}{\text{Price}}$ | Inverse of P/E |
-| `P_RECEITA` (P/Sales) | $\dfrac{\text{Market Cap}}{\text{Net Revenue}}$ | MC and Revenue $> 0$ |
-| `EV_EBITDA` | $\dfrac{\text{MC} + \text{Net Debt}}{\text{EBITDA}}$ | **`null` for banks and insurers** |
-| `EV_RECEITA` | $\dfrac{\text{MC} + \text{Net Debt}}{\text{Net Revenue}}$ | **`null` for banks and insurers** |
+| `P_L` / `P_L_ATUAL` | $`\dfrac{\text{Price}}{\text{EPS}}`$ | Price $`> 0`$ and EPS $`> 0`$ |
+| `P_VP` / `P_VP_ATUAL` | $`\dfrac{\text{Price}}{\text{BVPS}}`$ | Price $`> 0`$ and BVPS $`> 0`$ |
+| `EARNINGS_YIELD` | $`\dfrac{\text{EPS}}{\text{Price}}`$ | Inverse of P/E |
+| `P_RECEITA` (P/Sales) | $`\dfrac{\text{Market Cap}}{\text{Net Revenue}}`$ | MC and Revenue $`> 0`$ |
+| `EV_EBITDA` | $`\dfrac{\text{MC} + \text{Net Debt}}{\text{EBITDA}}`$ | **`null` for banks and insurers** |
+| `EV_RECEITA` | $`\dfrac{\text{MC} + \text{Net Debt}}{\text{Net Revenue}}`$ | **`null` for banks and insurers** |
 
 ### Current snapshot
 
@@ -779,7 +779,7 @@ File: `synetra/transformer.py → audit_data`.
 |---|---|
 | `gaps_count` | `ANO.diff().over("TICKER") > 1` |
 | `tickers_with_gaps` | Unique tickers with any gap |
-| `roe_outliers` | Records with $|\text{ROE}| > 5$ (above 500%) |
+| `roe_outliers` | Records with $`\lvert\text{ROE}\rvert > 5`$ (above 500%) |
 | `zero_revenue_pct` | Percentage of records with null or zero revenue |
 
 ### Per-ticker Data Quality

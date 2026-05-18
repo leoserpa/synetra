@@ -51,7 +51,7 @@ Antes das fórmulas, os contratos que mantêm o pipeline previsível.
 
 ### Notação usada
 
-- Expressões em LaTeX ($\cdot$) para matemática.
+- Expressões em LaTeX ($`\cdot`$) para matemática.
 - Blocos ```python``` quando é essencial mostrar a expressão Polars.
 - `null` significa `None` (Polars) — explicitamente ausente, diferente de zero.
 - "Categoria" se refere ao enum `Categoria` (`INDUSTRIAL`, `FINANCEIRO`, `SEGURADORA`).
@@ -277,7 +277,7 @@ Após o pivot, `_ensure_all_account_columns` garante que todas as colunas espera
 ### Consolidação de caixa (seguradoras)
 
 $$
-\text{CAIXA\_EQUIVALENTES}_{\text{seguradora}} = \text{Caixa} + \text{Aplicações CP} + \text{Aplicações LP}
+\text{CAIXA EQUIVALENTES}_{\text{seguradora}} = \text{Caixa} + \text{Aplicações CP} + \text{Aplicações LP}
 $$
 
 Para os outros setores, `CAIXA_EQUIVALENTES` fica como está.
@@ -336,21 +336,21 @@ Função: `get_tier1_expressions()`.
 
 | Indicador | Fórmula | Setores | Contas usadas |
 |---|---|---|---|
-| `ROE` | $\dfrac{\text{Lucro Líquido}}{\text{Patrimônio Líquido}}$ | Todos | `LUCRO_FINAL`, `PATRIMONIO_LIQUIDO` |
-| `ROA` | $\dfrac{\text{Lucro Líquido}}{\text{Ativo Total}}$ | Todos | `LUCRO_FINAL`, `ATIVO_TOTAL` |
-| `LPA` | $\dfrac{\text{Lucro Líquido}}{\text{Qtde de Ações}}$ | Todos | `LUCRO_FINAL`, `QTDE_ACOES` (FRE) |
-| `VPA` | $\dfrac{\text{PL}}{\text{Qtde de Ações}}$ | Todos | `PATRIMONIO_LIQUIDO`, `QTDE_ACOES` |
-| `GIRO_ATIVO` | $\dfrac{\text{Receita Líquida}}{\text{Ativo Total}}$ | Todos | `RECEITA_LIQUIDA`, `ATIVO_TOTAL` |
-| `ALAVANCAGEM_LP` | $\dfrac{\text{Dívida LP}}{\text{Ativo Total}}$ | Todos | `DIVIDA_LP`, `ATIVO_TOTAL` (auxiliar; removida na finalização) |
-| `ACCRUALS` | $\text{Lucro Líquido} - \text{FCO}$ | Todos | `LUCRO_FINAL`, `FCO` |
-| `ACCRUAL_RATIO` | $\dfrac{\text{Lucro Líquido} - \text{FCO}}{\text{Ativo Total}}$ | Industrial | `LUCRO_FINAL`, `FCO`, `ATIVO_TOTAL` |
-| `GP_A` | $\dfrac{\text{Lucro Bruto}}{\text{Ativo Total}}$ | Industrial | `RESULTADO_BRUTO`, `ATIVO_TOTAL` |
-| `MARGEM_EBIT` | $\dfrac{\text{EBIT}}{\text{Receita Líquida}}$ | Todos (mas anulada em bancos) | `EBIT`, `RECEITA_LIQUIDA` |
-| `MARGEM_LIQUIDA` | $\dfrac{\text{Lucro Líquido}}{\text{Receita Líquida}}$ | Todos | `LUCRO_FINAL`, `RECEITA_LIQUIDA` |
-| `MARGEM_BRUTA` | $\dfrac{\text{Lucro Bruto}}{\text{Receita Líquida}}$ | Todos (mas anulada em bancos/seguradoras) | `RESULTADO_BRUTO`, `RECEITA_LIQUIDA` |
+| `ROE` | $`\dfrac{\text{Lucro Líquido}}{\text{Patrimônio Líquido}}`$ | Todos | `LUCRO_FINAL`, `PATRIMONIO_LIQUIDO` |
+| `ROA` | $`\dfrac{\text{Lucro Líquido}}{\text{Ativo Total}}`$ | Todos | `LUCRO_FINAL`, `ATIVO_TOTAL` |
+| `LPA` | $`\dfrac{\text{Lucro Líquido}}{\text{Qtde de Ações}}`$ | Todos | `LUCRO_FINAL`, `QTDE_ACOES` (FRE) |
+| `VPA` | $`\dfrac{\text{PL}}{\text{Qtde de Ações}}`$ | Todos | `PATRIMONIO_LIQUIDO`, `QTDE_ACOES` |
+| `GIRO_ATIVO` | $`\dfrac{\text{Receita Líquida}}{\text{Ativo Total}}`$ | Todos | `RECEITA_LIQUIDA`, `ATIVO_TOTAL` |
+| `ALAVANCAGEM_LP` | $`\dfrac{\text{Dívida LP}}{\text{Ativo Total}}`$ | Todos | `DIVIDA_LP`, `ATIVO_TOTAL` (auxiliar; removida na finalização) |
+| `ACCRUALS` | $`\text{Lucro Líquido} - \text{FCO}`$ | Todos | `LUCRO_FINAL`, `FCO` |
+| `ACCRUAL_RATIO` | $`\dfrac{\text{Lucro Líquido} - \text{FCO}}{\text{Ativo Total}}`$ | Industrial | `LUCRO_FINAL`, `FCO`, `ATIVO_TOTAL` |
+| `GP_A` | $`\dfrac{\text{Lucro Bruto}}{\text{Ativo Total}}`$ | Industrial | `RESULTADO_BRUTO`, `ATIVO_TOTAL` |
+| `MARGEM_EBIT` | $`\dfrac{\text{EBIT}}{\text{Receita Líquida}}`$ | Todos (mas anulada em bancos) | `EBIT`, `RECEITA_LIQUIDA` |
+| `MARGEM_LIQUIDA` | $`\dfrac{\text{Lucro Líquido}}{\text{Receita Líquida}}`$ | Todos | `LUCRO_FINAL`, `RECEITA_LIQUIDA` |
+| `MARGEM_BRUTA` | $`\dfrac{\text{Lucro Bruto}}{\text{Receita Líquida}}`$ | Todos (mas anulada em bancos/seguradoras) | `RESULTADO_BRUTO`, `RECEITA_LIQUIDA` |
 | `CAPEX` | `CAPEX_VAL` (via regex) | Industrial + Seguradora | detectado pela regex no passo `detect_special_accounts` |
 | `DEPREC_AMORT` | `DEPREC_AMORT` (via regex) | Industrial + Seguradora | idem |
-| `PROVENTOS` | $|{\text{Dividendos Pagos}}|$ | Todos | `DIVIDENDOS_PAGOS` (regex) |
+| `PROVENTOS` | $`\lvert\text{Dividendos Pagos}\rvert`$ | Todos | `DIVIDENDOS_PAGOS` (regex) |
 
 ### Tier 2 — Fluxo de caixa
 
@@ -391,9 +391,9 @@ Função: `get_tier3_expressions()`.
 
 | Indicador | Fórmula | Setores | Observação |
 |---|---|---|---|
-| `MARGEM_EBITDA` | $\dfrac{\text{EBITDA}}{\text{Receita Líquida}}$ | Todos (mas anulada em bancos) | — |
-| `DIVIDA_TOTAL` | $\text{Dívida CP} + \text{Dívida LP}$ (industrial) $\mid$ $0$ (seguradora) $\mid$ `null` (financeiro) | varia | Bancos têm "dívida" como matéria-prima, não operacional |
-| `LIQUIDEZ_CORRENTE` | $\dfrac{\text{Ativo Circulante}}{\text{Passivo Circulante}}$ | Industrial | `null` para bancos e seguradoras |
+| `MARGEM_EBITDA` | $`\dfrac{\text{EBITDA}}{\text{Receita Líquida}}`$ | Todos (mas anulada em bancos) | — |
+| `DIVIDA_TOTAL` | $`\text{Dívida CP} + \text{Dívida LP}`$ (industrial) $`\mid`$ $`0`$ (seguradora) $`\mid`$ `null` (financeiro) | varia | Bancos têm "dívida" como matéria-prima, não operacional |
+| `LIQUIDEZ_CORRENTE` | $`\dfrac{\text{Ativo Circulante}}{\text{Passivo Circulante}}`$ | Industrial | `null` para bancos e seguradoras |
 
 Renomeada no `_merge_tickers`: `DIVIDA_TOTAL` vira `DIVIDA_BRUTA` no output público.
 
@@ -403,11 +403,11 @@ Função: `get_tier4_expressions()`.
 
 | Indicador | Fórmula | Setores |
 |---|---|---|
-| `DIVIDA_LIQUIDA` | $\text{Dívida Total} - \text{Caixa e Equivalentes}$ | Industrial |
-| | $0 - \text{Caixa}$ | Seguradora |
+| `DIVIDA_LIQUIDA` | $`\text{Dívida Total} - \text{Caixa e Equivalentes}`$ | Industrial |
+| | $`0 - \text{Caixa}`$ | Seguradora |
 | | `null` | Financeiro |
-| `DIVIDA_PL` | $\dfrac{\text{Dívida Total}}{\text{Patrimônio Líquido}}$ | Industrial |
-| | $0$ | Seguradora |
+| `DIVIDA_PL` | $`\dfrac{\text{Dívida Total}}{\text{Patrimônio Líquido}}`$ | Industrial |
+| | $`0`$ | Seguradora |
 | | `null` | Financeiro |
 
 ### Tier 5 — Ratios finais
@@ -428,34 +428,34 @@ $$
 \text{ROIC} = \dfrac{\text{EBIT} \times (1 - t)}{\text{PL} + \text{Dívida Bruta}}
 $$
 
-Onde $t = 0{,}34$ é a alíquota combinada IR + CSLL no Brasil (Lei 9.249/95 e Lei 9.316/96), definida em `BRAZIL_TAX_RATE`. Aplicável só a industriais.
+Onde $`t = 0,34`$ é a alíquota combinada IR + CSLL no Brasil (Lei 9.249/95 e Lei 9.316/96), definida em `BRAZIL_TAX_RATE`. Aplicável só a industriais.
 
 **Altman Z''-Score para Emerging Markets**
 
 $$
-Z'' = 6{,}56 \cdot A + 3{,}26 \cdot B + 6{,}72 \cdot C + 1{,}05 \cdot D
+Z'' = 6,56 \cdot A + 3,26 \cdot B + 6,72 \cdot C + 1,05 \cdot D
 $$
 
 Onde:
 
 $$
 \begin{aligned}
-A &= \dfrac{\text{Ativo Circulante} - \text{Passivo Circulante}}{\text{Ativo Total}} \\[4pt]
-B &= \dfrac{\text{Patrimônio Líquido}}{\text{Ativo Total}} \\[4pt]
-C &= \dfrac{\text{EBIT}}{\text{Ativo Total}} \\[4pt]
+A &= \dfrac{\text{Ativo Circulante} - \text{Passivo Circulante}}{\text{Ativo Total}} \\
+B &= \dfrac{\text{Patrimônio Líquido}}{\text{Ativo Total}} \\
+C &= \dfrac{\text{EBIT}}{\text{Ativo Total}} \\
 D &= \dfrac{\text{Patrimônio Líquido}}{\text{Passivo Total}}
 \end{aligned}
 $$
 
-O passivo total é calculado como $\text{Ativo Total} - \text{PL}$. Coeficientes fixos em `ALTMAN_COEF_WC_TA`, `ALTMAN_COEF_RE_TA`, `ALTMAN_COEF_EBIT_TA`, `ALTMAN_COEF_BV_TL`. Aplicável só a industriais.
+O passivo total é calculado como $`\text{Ativo Total} - \text{PL}`$. Coeficientes fixos em `ALTMAN_COEF_WC_TA`, `ALTMAN_COEF_RE_TA`, `ALTMAN_COEF_EBIT_TA`, `ALTMAN_COEF_BV_TL`. Aplicável só a industriais.
 
 Referência: Altman (2005), *"An Emerging Market Credit Scoring System for Corporate Bonds"*.
 
 | Zona | Interpretação |
 |---|---|
-| $Z'' > 2{,}60$ | Segura — baixo risco de distress |
-| $1{,}10 < Z'' \leq 2{,}60$ | Cinza — monitorar |
-| $Z'' \leq 1{,}10$ | Distress — alta probabilidade de insolvência em 2 anos |
+| $`Z'' > 2,60`$ | Segura — baixo risco de distress |
+| $`1,10 < Z'' \leq 2,60`$ | Cinza — monitorar |
+| $`Z'' \leq 1,10`$ | Distress — alta probabilidade de insolvência em 2 anos |
 
 ---
 
@@ -467,15 +467,15 @@ Arquivo: `synetra/transformer.py → _calculate_fscore`.
 
 | # | Categoria | Critério | Expressão |
 |---|---|---|---|
-| 1 | Rentabilidade | ROA positivo | $\text{ROA} > 0$ |
-| 2 | Rentabilidade | FCO positivo | $\text{FCO} > 0$ |
-| 3 | Rentabilidade | ROA crescente | $\text{ROA}_t > \text{ROA}_{t-1}$ |
-| 4 | Qualidade do lucro | FCO maior que lucro | $\text{FCO} > \text{Lucro Líquido}$ |
-| 5 | Alavancagem | Alavancagem LP caindo | $\text{ALAVANCAGEM\_LP}_t < \text{ALAVANCAGEM\_LP}_{t-1}$ |
-| 6 | Liquidez | Liquidez corrente crescendo | $\text{LIQUIDEZ}_t > \text{LIQUIDEZ}_{t-1}$ |
-| 7 | Diluição | Sem emissão de ações | $\text{QTDE\_ACOES}_t \leq \text{QTDE\_ACOES}_{t-1}$ |
-| 8 | Eficiência | Margem bruta crescendo | $\text{MARGEM\_BRUTA}_t > \text{MARGEM\_BRUTA}_{t-1}$ |
-| 9 | Eficiência | Giro do ativo crescendo | $\text{GIRO\_ATIVO}_t > \text{GIRO\_ATIVO}_{t-1}$ |
+| 1 | Rentabilidade | ROA positivo | $`\text{ROA} > 0`$ |
+| 2 | Rentabilidade | FCO positivo | $`\text{FCO} > 0`$ |
+| 3 | Rentabilidade | ROA crescente | $`\text{ROA}_t > \text{ROA}_{t-1}`$ |
+| 4 | Qualidade do lucro | FCO maior que lucro | $`\text{FCO} > \text{Lucro Líquido}`$ |
+| 5 | Alavancagem | Alavancagem LP caindo | $`\text{ALAVANCAGEM\_LP}_t < \text{ALAVANCAGEM\_LP}_{t-1}`$ |
+| 6 | Liquidez | Liquidez corrente crescendo | $`\text{LIQUIDEZ}_t > \text{LIQUIDEZ}_{t-1}`$ |
+| 7 | Diluição | Sem emissão de ações | $`\text{QTDE\_ACOES}_t \leq \text{QTDE\_ACOES}_{t-1}`$ |
+| 8 | Eficiência | Margem bruta crescendo | $`\text{MARGEM\_BRUTA}_t > \text{MARGEM\_BRUTA}_{t-1}`$ |
+| 9 | Eficiência | Giro do ativo crescendo | $`\text{GIRO\_ATIVO}_t > \text{GIRO\_ATIVO}_{t-1}`$ |
 
 **Regras de guarda:**
 
@@ -483,7 +483,7 @@ Arquivo: `synetra/transformer.py → _calculate_fscore`.
 - `F_SCORE = null` para `FINANCEIRO` e `SEGURADORA`.
 - Critério individual com operando nulo soma 0 (fail-closed).
 
-**Interpretação típica:** $F = 8$ ou $9$ indica qualidade alta; $F \leq 2$ indica empresas em deterioração. Piotroski (2000) mostrou que um long-short comprado no F alto e vendido no F baixo gera alpha significativo em amostras de value stocks.
+**Interpretação típica:** $`F = 8`$ ou $`9`$ indica qualidade alta; $`F \leq 2`$ indica empresas em deterioração. Piotroski (2000) mostrou que um long-short comprado no F alto e vendido no F baixo gera alpha significativo em amostras de value stocks.
 
 ---
 
@@ -494,10 +494,10 @@ Detector de manipulação contábil. Oito termos que comparam ano atual vs. ano 
 Arquivo: `synetra/transformer.py → _calculate_beneish` e funções `_beneish_*`.
 
 $$
-M = -4{,}84 + 0{,}920 \cdot \text{DSRI} + 0{,}528 \cdot \text{GMI} + 0{,}404 \cdot \text{AQI} + 0{,}892 \cdot \text{SGI}
+M = -4,84 + 0,920 \cdot \text{DSRI} + 0,528 \cdot \text{GMI} + 0,404 \cdot \text{AQI} + 0,892 \cdot \text{SGI}
 $$
 $$
-{}+ 0{,}115 \cdot \text{DEPI} - 0{,}172 \cdot \text{SGAI} + 4{,}679 \cdot \text{TATA} - 0{,}327 \cdot \text{LVGI}
+{}+ 0,115 \cdot \text{DEPI} - 0,172 \cdot \text{SGAI} + 4,679 \cdot \text{TATA} - 0,327 \cdot \text{LVGI}
 $$
 
 Referência: Beneish, M. D. (1999), *"The Detection of Earnings Manipulation"*, Financial Analysts Journal.
@@ -506,14 +506,14 @@ Referência: Beneish, M. D. (1999), *"The Detection of Earnings Manipulation"*, 
 
 | Termo | Nome | Fórmula | O que capta |
 |---|---|---|---|
-| DSRI | Days Sales in Receivables Index | $\dfrac{\text{Receber}_t / \text{Receita}_t}{\text{Receber}_{t-1} / \text{Receita}_{t-1}}$ | Inflação de receita via crédito agressivo |
-| GMI | Gross Margin Index | $\dfrac{\text{Margem Bruta}_{t-1}}{\text{Margem Bruta}_t}$ | Deterioração da margem (incentivo a manipular) |
-| AQI | Asset Quality Index | $\dfrac{1 - \frac{AC_t + \text{Imob}_t}{AT_t}}{1 - \frac{AC_{t-1} + \text{Imob}_{t-1}}{AT_{t-1}}}$ | Capitalização indevida de custos em ativos não correntes |
-| SGI | Sales Growth Index | $\dfrac{\text{Receita}_t}{\text{Receita}_{t-1}}$ | Crescimento explosivo (pressão para manter) |
-| DEPI | Depreciation Index | $\dfrac{D_{t-1} / (D_{t-1} + \text{Imob}_{t-1})}{D_t / (D_t + \text{Imob}_t)}$ | Redução de depreciação para inflar lucro |
-| SGAI | Sales G&A Expenses Index | $\dfrac{\text{Desp. Op}_t / \text{Receita}_t}{\text{Desp. Op}_{t-1} / \text{Receita}_{t-1}}$ | Descolamento de despesas x receita |
-| TATA | Total Accruals to Total Assets | $\dfrac{\text{Accruals}_t}{\text{Ativo Total}_t}$ | Lucro contábil descolado do caixa |
-| LVGI | Leverage Index | $\dfrac{\text{Dívida}_t / AT_t}{\text{Dívida}_{t-1} / AT_{t-1}}$ | Elevação de alavancagem pressionando contabilidade |
+| DSRI | Days Sales in Receivables Index | $`\dfrac{\text{Receber}_t / \text{Receita}_t}{\text{Receber}_{t-1} / \text{Receita}_{t-1}}`$ | Inflação de receita via crédito agressivo |
+| GMI | Gross Margin Index | $`\dfrac{\text{Margem Bruta}_{t-1}}{\text{Margem Bruta}_t}`$ | Deterioração da margem (incentivo a manipular) |
+| AQI | Asset Quality Index | $`\dfrac{1 - \frac{AC_t + \text{Imob}_t}{AT_t}}{1 - \frac{AC_{t-1} + \text{Imob}_{t-1}}{AT_{t-1}}}`$ | Capitalização indevida de custos em ativos não correntes |
+| SGI | Sales Growth Index | $`\dfrac{\text{Receita}_t}{\text{Receita}_{t-1}}`$ | Crescimento explosivo (pressão para manter) |
+| DEPI | Depreciation Index | $`\dfrac{D_{t-1} / (D_{t-1} + \text{Imob}_{t-1})}{D_t / (D_t + \text{Imob}_t)}`$ | Redução de depreciação para inflar lucro |
+| SGAI | Sales G&A Expenses Index | $`\dfrac{\text{Desp. Op}_t / \text{Receita}_t}{\text{Desp. Op}_{t-1} / \text{Receita}_{t-1}}`$ | Descolamento de despesas x receita |
+| TATA | Total Accruals to Total Assets | $`\dfrac{\text{Accruals}_t}{\text{Ativo Total}_t}`$ | Lucro contábil descolado do caixa |
+| LVGI | Leverage Index | $`\dfrac{\text{Dívida}_t / AT_t}{\text{Dívida}_{t-1} / AT_{t-1}}`$ | Elevação de alavancagem pressionando contabilidade |
 
 ### Regras de guarda
 
@@ -523,7 +523,7 @@ Referência: Beneish, M. D. (1999), *"The Detection of Earnings Manipulation"*, 
 
 ### Interpretação
 
-$M > -2{,}22$ classifica a empresa como candidata a manipulação contábil. Não é prova — é sinal para investigar as demonstrações com mais cuidado.
+$`M > -2,22`$ classifica a empresa como candidata a manipulação contábil. Não é prova — é sinal para investigar as demonstrações com mais cuidado.
 
 ---
 
@@ -542,7 +542,7 @@ $$
 | `CRESC_RECEITA_YOY` | `RECEITA_LIQUIDA` do ano anterior |
 | `CRESC_LUCRO_YOY` | `LUCRO_FINAL` do ano anterior |
 
-Base $\leq 0$ retorna `null`. Isso evita "crescimento" enganoso quando a empresa sai do prejuízo.
+Base $`\leq 0`$ retorna `null`. Isso evita "crescimento" enganoso quando a empresa sai do prejuízo.
 
 ### CAGR (Compound Annual Growth Rate)
 
@@ -550,7 +550,7 @@ $$
 \text{CAGR}(N) = \left(\dfrac{\text{Valor}_t}{\text{Valor}_{t-N}}\right)^{1/N} - 1
 $$
 
-| Indicador | $N$ | Base |
+| Indicador | $`N`$ | Base |
 |---|---|---|
 | `CAGR_RECEITA_3A` | 3 | `RECEITA_LIQUIDA` de 3 anos atrás |
 | `CAGR_RECEITA_5A` | 5 | `RECEITA_LIQUIDA` de 5 anos atrás |
@@ -561,9 +561,9 @@ $$
 
 | Caso | Comportamento |
 |---|---|
-| Base $\leq 0$ | `null` — raiz de não positivo é inválida |
-| Valor atual $\leq 0$ | `null` — prejuízo corrente sobre base positiva confunde leitura |
-| Histórico insuficiente (menos de $N+1$ anos) | `null` — sem base de comparação |
+| Base $`\leq 0`$ | `null` — raiz de não positivo é inválida |
+| Valor atual $`\leq 0`$ | `null` — prejuízo corrente sobre base positiva confunde leitura |
+| Histórico insuficiente (menos de $`N+1`$ anos) | `null` — sem base de comparação |
 | Contaminação entre tickers | evitada com `shift(N).over("TICKER")` |
 
 **Matriz de leitura cruzada** (análise prática):
@@ -589,11 +589,11 @@ Arquivo: `synetra/transformer.py → _quant_factor_expressions`.
 
 | Fator | Categoria | Fórmula | Setores |
 |---|---|---|---|
-| `CASH_CONVERSION` | Quality | $\dfrac{\text{FCO}}{\text{Lucro Líquido}}$ (só se lucro $> 0$) | Industrial + Seguradora |
-| `EARNINGS_STABILITY` | Quality / Risk | $\text{std}(\text{ROE})$ em janela de 5 anos | Todos |
-| `VOL_LUCRO` | Risk | $\dfrac{\text{std}(\text{Lucro})_{5a}}{\text{mean}(\text{Lucro})_{5a}}$ (só se média $> 0$) | Todos |
-| `DELTA_ROE` | Momentum | $\text{ROE}_t - \text{ROE}_{t-1}$ | Todos |
-| `DELTA_MARGEM` | Momentum | $\text{Margem Líquida}_t - \text{Margem Líquida}_{t-1}$ | Todos |
+| `CASH_CONVERSION` | Quality | $`\dfrac{\text{FCO}}{\text{Lucro Líquido}}`$ (só se lucro $`> 0`$) | Industrial + Seguradora |
+| `EARNINGS_STABILITY` | Quality / Risk | $`\text{std}(\text{ROE})`$ em janela de 5 anos | Todos |
+| `VOL_LUCRO` | Risk | $`\dfrac{\text{std}(\text{Lucro})_{5a}}{\text{mean}(\text{Lucro})_{5a}}`$ (só se média $`> 0`$) | Todos |
+| `DELTA_ROE` | Momentum | $`\text{ROE}_t - \text{ROE}_{t-1}`$ | Todos |
+| `DELTA_MARGEM` | Momentum | $`\text{Margem Líquida}_t - \text{Margem Líquida}_{t-1}`$ | Todos |
 
 ### Implementação
 
@@ -627,16 +627,16 @@ Arquivo: `synetra/transformer.py → _efficiency_expressions`.
 
 | Indicador | Fórmula | Setores |
 |---|---|---|
-| `MARGEM_FCO` | $\dfrac{\text{FCO}}{\text{Receita Líquida}}$ | Industrial + Seguradora |
-| `MARGEM_FCL` | $\dfrac{\text{FCL}}{\text{Receita Líquida}}$ | Industrial + Seguradora |
-| `CASH_ROA` | $\dfrac{\text{FCO}}{\text{Ativo Total}}$ | Industrial + Seguradora |
-| `PMR` | $\dfrac{\text{Contas a Receber}}{\text{Receita Líquida}} \times 365$ | Industrial + Seguradora |
-| `CAPITAL_DE_GIRO` | $\text{Ativo Circulante} - \text{Passivo Circulante}$ | Industrial + Seguradora |
-| `ROCE` | $\dfrac{\text{EBIT}}{\text{Ativo Total} - \text{Passivo Circulante}}$ | Industrial + Seguradora |
-| `NOPAT` | $\text{EBIT} \times (1 - 0{,}34)$ | Industrial + Seguradora |
-| `REINVESTMENT_RATE` | $\dfrac{|\text{CAPEX}|}{|\text{Depreciação}|}$ | Industrial + Seguradora |
-| `SUSTAINABLE_GROWTH` | $\text{ROE} \times (1 - \text{Payout}_{\text{clipped}[0,1]})$ | **Universal — todos os setores** |
-| `CASH_RATIO` | $\dfrac{\text{Caixa}}{\text{Passivo Circulante}}$ | Industrial + Seguradora |
+| `MARGEM_FCO` | $`\dfrac{\text{FCO}}{\text{Receita Líquida}}`$ | Industrial + Seguradora |
+| `MARGEM_FCL` | $`\dfrac{\text{FCL}}{\text{Receita Líquida}}`$ | Industrial + Seguradora |
+| `CASH_ROA` | $`\dfrac{\text{FCO}}{\text{Ativo Total}}`$ | Industrial + Seguradora |
+| `PMR` | $`\dfrac{\text{Contas a Receber}}{\text{Receita Líquida}} \times 365`$ | Industrial + Seguradora |
+| `CAPITAL_DE_GIRO` | $`\text{Ativo Circulante} - \text{Passivo Circulante}`$ | Industrial + Seguradora |
+| `ROCE` | $`\dfrac{\text{EBIT}}{\text{Ativo Total} - \text{Passivo Circulante}}`$ | Industrial + Seguradora |
+| `NOPAT` | $`\text{EBIT} \times (1 - 0,34)`$ | Industrial + Seguradora |
+| `REINVESTMENT_RATE` | $`\dfrac{\lvert\text{CAPEX}\rvert}{\lvert\text{Depreciação}\rvert}`$ | Industrial + Seguradora |
+| `SUSTAINABLE_GROWTH` | $`\text{ROE} \times (1 - \text{Payout}_{\text{clipped[0,1]}})`$ | **Universal — todos os setores** |
+| `CASH_RATIO` | $`\dfrac{\text{Caixa}}{\text{Passivo Circulante}}`$ | Industrial + Seguradora |
 
 ### Por que 9 são anulados para bancos?
 
@@ -692,7 +692,7 @@ Classificação por sufixo:
 | final `4`, `5`, `6`, `7`, `8` | PN (preferencial) |
 | final `11` | UNIT |
 
-Quando o FRE não separa ON/PN, o cálculo cai para fallback simples: $\text{preço} \times \text{QTDE\_ACOES}$.
+Quando o FRE não separa ON/PN, o cálculo cai para fallback simples: $`\text{preço} \times \text{QTDE\_ACOES}`$.
 
 ### Múltiplos calculados
 
@@ -700,12 +700,12 @@ Os múltiplos são calculados duas vezes: uma com `PRECO_FIM_ANO` (valuation anu
 
 | Múltiplo | Fórmula | Regra de guarda |
 |---|---|---|
-| `P_L` / `P_L_ATUAL` | $\dfrac{\text{Preço}}{\text{LPA}}$ | Preço $> 0$ e LPA $> 0$ |
-| `P_VP` / `P_VP_ATUAL` | $\dfrac{\text{Preço}}{\text{VPA}}$ | Preço $> 0$ e VPA $> 0$ |
-| `EARNINGS_YIELD` | $\dfrac{\text{LPA}}{\text{Preço}}$ | Inverso do P/L |
-| `P_RECEITA` | $\dfrac{\text{Market Cap}}{\text{Receita Líquida}}$ | MC e Receita $> 0$ |
-| `EV_EBITDA` | $\dfrac{\text{MC} + \text{Dívida Líquida}}{\text{EBITDA}}$ | **`null` para bancos e seguradoras** |
-| `EV_RECEITA` | $\dfrac{\text{MC} + \text{Dívida Líquida}}{\text{Receita Líquida}}$ | **`null` para bancos e seguradoras** |
+| `P_L` / `P_L_ATUAL` | $`\dfrac{\text{Preço}}{\text{LPA}}`$ | Preço $`> 0`$ e LPA $`> 0`$ |
+| `P_VP` / `P_VP_ATUAL` | $`\dfrac{\text{Preço}}{\text{VPA}}`$ | Preço $`> 0`$ e VPA $`> 0`$ |
+| `EARNINGS_YIELD` | $`\dfrac{\text{LPA}}{\text{Preço}}`$ | Inverso do P/L |
+| `P_RECEITA` | $`\dfrac{\text{Market Cap}}{\text{Receita Líquida}}`$ | MC e Receita $`> 0`$ |
+| `EV_EBITDA` | $`\dfrac{\text{MC} + \text{Dívida Líquida}}{\text{EBITDA}}`$ | **`null` para bancos e seguradoras** |
+| `EV_RECEITA` | $`\dfrac{\text{MC} + \text{Dívida Líquida}}{\text{Receita Líquida}}`$ | **`null` para bancos e seguradoras** |
 
 ### Snapshot atual
 
@@ -780,7 +780,7 @@ Arquivo: `synetra/transformer.py → audit_data`.
 |---|---|
 | `gaps_count` | `ANO.diff().over("TICKER") > 1` |
 | `tickers_with_gaps` | Tickers únicos com qualquer gap |
-| `roe_outliers` | Registros com $|\text{ROE}| > 5$ (ou seja, > 500%) |
+| `roe_outliers` | Registros com $`\lvert\text{ROE}\rvert > 5`$ (ou seja, > 500%) |
 | `zero_revenue_pct` | Percentual de registros com receita nula ou zero |
 
 ### Data Quality por ticker
